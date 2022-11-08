@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timco - New Project</title>
+
+    <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css">
+
+    <link rel="stylesheet" href="./NewProject.css">
+
+    <link rel="stylesheet" href="./../../../Components/TextInput/text__input.css">
+    <link rel="stylesheet" href="./../../../Components/ClosableLid/closableLid.css">
+    <link rel="stylesheet" href="./../../../Components/TabNavBar/top_tab_navbar.css">
+    <link rel="stylesheet" href="./../../../Components/CTA_Button/cta-button.css">
+    <link rel="stylesheet" href="./../../../Components/SelectableCard/selectable_card.css">
+    <link rel="stylesheet" href="./../../../Components/BoxFileInput/boxFileInput.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="closelid">
+        <img src="./../../LandingPage/resources/images/isotype.png">
+        <a href="./../Dashboard/dashboard.html"> <img src="./../../../Components/ClosableLid/resources/closeLid.png">
+        </a>
+    </div>
+
+
+
+    <!-- -----------------------------------
+   PUBLICA TU PROYECTO
+    ----------------------------------- -->
+    <main class="details">
+        <section class="details__forms">
+            <form class="details__forms__form  mainCardsForm" action="">
+
+                <h1>Publica tu proyecto</h1>
+                <p>Selecciona el area a la que pertenece el proyecto, esto nos permitirá llegar a los estudiantes que
+                    estén
+                    motivados por aprender sobre esto</p>
+
+
+                <div class="mainCardsForm__form">
+                    <input class="selectable_card_input" required type="radio" name="areaId" id="UX/UI"
+                        value=1>
+
+                    <label class="selectable_card" style="background-color: #E0FE68;" for="UX/UI">
+                        <img src="./resources/ui-ux.png">
+                        <p>Diseño UX/UI</p>
+                    </label>
+
+
+                    <input class="selectable_card_input" required type="radio" name="areaId" id="Dev"
+                        value=2>
+
+                    <label class="selectable_card" style="background-color:#8AC2DD;" for="Dev">
+                        <img src="./resources/dev.png">
+                        <p>Desarrollo</p>
+                    </label>
+
+                    <input class="selectable_card_input" required type="radio" name="areaId" id="Marketing"
+                        value=3 >
+
+                    <label class="selectable_card" style="background-color:#00D380;" for="Marketing">
+                        <img src="./resources/marketing.png">
+                        <p>Marketing</p>
+                    </label>
+
+                </div>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover03.png">
+            <form class="details__forms__form" action="">
+                <h1>Publica tu proyecto</h1>
+                <p><small>Explicale a los estudiantes algunos detalles sobre tu proyecto, para facilitar su desarrollo y
+                        obtener los resultados que esperas</small></p>
+
+                <div class="textInput">
+                    <label for="projectName">
+                        <p>Nombre del Proyecto</p>
+                    </label>
+                    <input required="true" type="text" id="projectName" name="name"
+                        placeholder="Ej: Diseño de pagina web para marca de ropa infantil">
+                </div>
+
+                <div class="details__forms__form__letterbox">
+                    <h3>Recomendación</h3>
+                    <p><small>Busca el titulo que contenga todas las palabras claves del proyecto y que al mismo tiempo,
+                            sea
+                            una sintesis de lo que necesitas</small></p>
+                </div>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover03.png">
+            <form class="details__forms__form" action="">
+                <h1>Publica tu proyecto</h1>
+                <p><small>Explicale a los estudiantes algunos detalles sobre tu proyecto, para facilitar su desarrollo y
+                        obtener los resultados que esperas</small></p>
+
+                <div class="textInput">
+                    <label for="projectDescription">
+                        <p>Descripción del proyecto*</p>
+                    </label>
+                    <textarea required="true" rows="8" cols="5" name="description" id="projectDescription"
+                        placeholder="Ej: Necesito diseñar una pagina web de ropa infantil para dentro de un mes para el lanzamiento de mi marca personal. Los colores y las imagenes ya están definidas al igual que la descripción de cada producto. "></textarea>
+                </div>
+
+                <div class="details__forms__form__letterbox">
+                    <h3>Recomendación</h3>
+                    <p><small>Busca el titulo que contenga todas las palabras claves del proyecto y que al mismo tiempo,
+                            sea
+                            una sintesis de lo que necesitas</small></p>
+                </div>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover03.png">
+            <form class="details__forms__form" action="">
+                <h1>Publica tu proyecto</h1>
+                <p><small>Explicale a los estudiantes algunos detalles sobre tu proyecto, para facilitar su desarrollo y
+                        obtener los resultados que esperas</small></p>
+
+                <p class="box__file__input">
+                    <label for="attachment">
+                        <a class="btn btn-primary text-light" role="button" aria-disabled="false">Adjuntar archivos <img
+                                src="./resources/clippy.png"></a>
+                        <p id="files-area">
+                            <span id="filesList">
+                                <span id="files-names"></span>
+                            </span>
+                        </p>
+                    </label>
+                    <input type="file" name="projectFiles[]" id="attachment"
+                        style="visibility: hidden; position: absolute;" multiple />
+
+
+                </p>
+
+
+                <div class="details__forms__form__letterbox">
+                    <h3>Recomendación</h3>
+                    <p><small>Busca el titulo que contenga todas las palabras claves del proyecto y que al mismo tiempo,
+                            sea
+                            una sintesis de lo que necesitas</small></p>
+                </div>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover03.png">
+            <form class="details__forms__form" action="">
+
+
+                <div class="textInput">
+                    <label for="projectDeadline">
+                        <p>Fecha de entrega del proyecto*</p>
+                    </label>
+                    <input required="true" type="date" id="projectDeadline" name="timelineDate"
+                        placeholder="dd/mm/yyyy">
+                </div>
+
+                <div class="currencyInput">
+                    <label for="projectBudget">
+                        <p>Selecciona el pago del proyecto*</p>
+                    </label>
+                    <input min="850000" max="1200000" step="10000" required="true" type="number" id="projectBudget"
+                        placeholder="Presupuesto" name="priceTotal" value="850000">
+
+                    <br>
+                    <div style="display: flex; width:100%; justify-content: space-between; gap: 20px;">
+                        <p> <small> $850.000</small></p>
+                        <input step="10000" style="padding: 0; flex: 1;" type="range">
+                        <p> <small>$1.200.000</small></p>
+                    </div>
+                </div>
+
+                <div class="details__forms__form__letterbox">
+                    <h3>Atención</h3>
+                    <p><small>Determina una fecha de acuerdo a lo que necesites. Esto nos servira para conocer el nivel
+                            urgencia de tu proyecto y buscar estudiantes que puedan responder por ello.
+                            <br><br>
+                            Recuerda que nuestro precios se basan en la tabla de contización del 2022, en conjunto con
+                            la urgencia del proyecto.<br><br> </small></p>
+                </div>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/qr.png">
+            <form class="details__forms__form" action="">
+
+                <div>
+                    <p><small>Nombre del Proyecto</small> </p>
+                    <h3 id="summary_projectName">Diseño de interfaces para página web</h3>
+                </div>
+                <div>
+
+                    <p><small>Valor del Proyecto</small></p>
+                    <h3 id="summary_projectBudget">$400.000</h3>
+                </div>
+                <div>
+                    <p><small>Fecha de entrega</small></p>
+                    <h3 id="summary_projectDeadline">24 de Feb 2022</h3>
+                </div>
+
+
+                <div class="details__forms__form__letterbox">
+                    <h3>Atención</h3>
+                    <p><small>Determina una fecha de acuerdo a lo que necesites. Esto nos servira para conocer el
+                            nivel
+                            urgencia de tu proyecto y buscar estudiantes que puedan responder por ello.
+                            <br><br>
+                            Recuerda que nuestro precios se basan en la tabla de contización del 2022, en conjunto
+                            con
+                            la urgencia del proyecto.<br><br> </small></p>
+                </div>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="./../../../Components/BoxFileInput/boxFileBehaviour.js"></script>
+    <script src="./../../../Components/CurrencyInput/currencyInput.js"></script>
+    <script type="module" src="./NewProject.js"></script>
+</body>
+
+</html>

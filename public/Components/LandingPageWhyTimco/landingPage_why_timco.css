@@ -1,0 +1,76 @@
+.landinPage__whyTimco {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    width: calc(100% + var(--bodyPadding)*2);
+    padding: 54px var(--bodyPadding) 160px var(--bodyPadding);
+    gap: 70px;
+}
+
+.landinPage__whyTimco__info {
+
+    display: flex;
+    max-width: 650px;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 20px;
+}
+
+
+
+.landinPage__whyTimco__info>ul>li {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    padding: 10px 0px;
+    position: relative;
+    gap: 10px;
+
+}
+
+.landinPage__whyTimco__info>ul li::before {
+    content: "\2022";
+
+    font-size: 50px;
+    /* creates the space between bullet, list item */
+    color: var(--ctaAccent);
+    /* changes the bullet color*/
+}
+
+@media (max-width: 1200px) {
+    .landinPage__whyTimco>img {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .landinPage__whyTimco__info {
+        display: flex;
+        gap: 30px;
+        text-align: center;
+        align-items: center;
+    }
+
+
+
+
+    .landinPage__whyTimco__info>ul {
+        padding: 0px;
+        text-align: left;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .landinPage__whyTimco {
+        padding: 54px var(--bodyPadding) 80px var(--bodyPadding);
+    }
+
+    .landinPage__whyTimco>img {
+        display: none;
+    }
+}

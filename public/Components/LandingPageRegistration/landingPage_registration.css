@@ -1,0 +1,30 @@
+.landingPage__registration {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 74px var(--bodyPadding);
+
+    width: calc(100% + var(--bodyPadding)*2);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url("./resources/background.png");
+}
+
+.landingPage__registration__form {
+    display: flex;
+
+    padding: 47px calc(var(--bodyPadding)/2) 27px calc(var(--bodyPadding)/2);
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    gap: 20px;
+}
+
+.landingPage__registration__form h1,
+.landingPage__registration__form p {
+    text-align: center;
+}

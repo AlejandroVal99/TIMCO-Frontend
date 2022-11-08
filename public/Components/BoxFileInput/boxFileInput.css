@@ -1,0 +1,52 @@
+#files-area {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.box__file__input {
+    border: 2px dashed #132644;
+    border-radius: 18.5818px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.box__file__input a {
+    color: var(--darkerGray);
+}
+
+.file-block {
+    border-radius: 10px;
+    background-color: rgba(144, 163, 203, 0.2);
+    margin: 5px;
+    color: initial;
+    display: inline-flex;
+}
+
+.file-block>span.name {
+    padding-right: 10px;
+    width: max-content;
+    display: inline-flex;
+}
+
+.file-delete {
+    display: flex;
+    width: 24px;
+    color: initial;
+    background-color: #6eb4ff00;
+    font-size: large;
+    justify-content: center;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.file-delete:hover {
+    background-color: rgba(144, 163, 203, 0.2);
+    border-radius: 10px;
+}
+
+.file-delete>span {
+    transform: rotate(45deg);
+}

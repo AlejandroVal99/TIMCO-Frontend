@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Recruiter - Home</title>
+
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css">
+    <link rel="stylesheet" href="././../../../Components/Sidebar/sidebar.css">
+    <link rel="stylesheet" href="./../../../Components/ProjectCard/project_card.css">
+    <link rel="stylesheet" href="./../../../Components/ListCard/listCard.css">
+    <link rel="stylesheet" href="./../../../Components/CTA_Button/cta-button.css">
+    <script type="module" src="./../../../src/RecruiterLoggedVerifier.js"></script>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="sidebar__header">
+            <img src="./../../../Components/Sidebar/resources/logo.png" alt="" srcset="">
+            <img src="./../../../Components/Sidebar/resources/profilePicture2.png" alt="" srcset="">
+
+            <p id="userName">Laura Carvajal</p>
+            <p id="userDetail"> Procter & Gamble</p>
+                
+
+        </div>
+
+
+        <nav>
+            <a class="selected" href="">
+                <img src="./../../../Components/Sidebar/resources/home icon.png">
+                <p>Inicio</p>
+            </a>
+            <a href="">
+                <img src="./../../../Components/Sidebar/resources/projects icon.png">
+                <p>Mis proyectos</p>
+            </a>
+            <a href="">
+                <img src="./../../../Components/Sidebar/resources/profile icon.png">
+                <p>Tu perfil</p>
+            </a>
+        </nav>
+
+        <footer id="signOutButton" class="sidebar__footer">
+            <img src="./../../../Components/Sidebar/resources/signout icon.png">
+            <p>Cerrar sesión</p>
+        </footer>
+
+    </nav>
+    <main>
+        <h1>¡Hola, <span id="helloUserName">Laura</span>!</h1>
+        <p>Aqui encontrarás todo lo relacionado</p>
+
+
+
+        <section class="dashboard_me">
+
+            <section class="dashboard_me__projects">
+                <h5>Crear un nuevo proyecto</h5>
+
+                <div class="dashboard_new__projects__nav">
+
+
+                </div>
+                <h5>Mis proyectos</h5>
+
+                <div>
+
+                    <div>
+
+
+                    </div>
+
+                    <nav class="dashboard_me__projects__nav">
+                        <button id="active-tab" value="active class="selected">Activos</button>
+                        <button id="finished-tab" value = "finished">Finalizados</button>
+                        <button id="waiting-tab" value = "Waiting">En espera</button>
+                    </nav>
+
+                    <div id="dashboard__vacancies">
+
+
+
+
+                    </div>
+                </div>
+
+            </section>
+            <section class=" dashboard_me__stats">
+                <h5>Mis métricas</h5>
+
+                <div>
+                    <div class="dashboard_me__stats__statCard">
+                        <h2>18</h2>
+                        <p>Dinero<br>invertido</p>
+                    </div>
+
+                    <div class="dashboard_me__stats__statCard">
+                        <h2>23</h2>
+                        <p>Estudiantes<br>contratados</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+
+    </main>
+
+    <script type="module" src="./dashboard.js"></script>
+
+</body>
+
+</html>

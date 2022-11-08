@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - Overview</title>
+
+    <link rel="stylesheet" href="./../../Pages/LandingPage/variables.css">
+    <link rel="stylesheet" href="./../../Components/Sidebar/sidebar.css">
+    <link rel="stylesheet" href="./../../Components/CTA_Button/cta-button.css">
+    <link rel="stylesheet" href="./../../Components/TextInput/text__input.css">
+    <link rel="stylesheet" href="./../../Components/ListCard/listCard.css">
+    <link rel="stylesheet" href="./overview.css">
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="sidebar__header">
+            <img src="./../../Components/Sidebar/resources/logo.png" alt="" srcset="">
+            <img src="./../../Components/Sidebar/resources/profilePicture.png" alt="" srcset="">
+
+            <p id="userCurrentName" >Alejando Valverde</p>
+            <p id="userCurrentDetail">Diseñador UX/UI</p>
+                
+
+        </div>
+
+
+        <nav>
+            <a href="./../Student/Dashboard/dashboard.html">
+                <img src="./../../Components/Sidebar/resources/home icon.png">
+                <p>Inicio</p>
+            </a>
+            <a class="selected" href="">
+                <img src="./../../Components/Sidebar/resources/projects icon.png">
+                <p>Mis proyectos</p>
+            </a>
+            <a href="">
+                <img src="./../../Components/Sidebar/resources/profile icon.png">
+                <p>Tu perfil</p>
+            </a>
+        </nav>
+
+        <footer id="signOutButton" class="sidebar__footer">
+            <img src="./../../Components/Sidebar/resources/signout icon.png">
+            <p>Cerrar sesión</p>
+        </footer>
+
+    </nav>
+
+    <main>
+
+        <p id = "btnReturnToDashboard"><img src="./resources/back icon.png" alt=""></a> Regresar</p>
+
+        <header class="overview__header">
+            <img class="overview__header__logo"
+                src="https://images.ctfassets.net/hz60gpuajnje/7znyJc3Y7SecEoKSYKWoaQ/1934595e33e7ee61970a4f7281bd90f8/P_G_Logo_RGB.svg">
+
+
+            <div class="overview__header__summary">
+                <div>
+                    <h2 class="overview__header__projectName">Project name</h2>
+                    <p class="overview__header__university">Project type</p>
+                </div>
+
+                <p class="overview__header__projectDescription">Project description</p>
+            </div>
+
+            <div class="overview__header__details">
+
+                <div>
+                    <p><strong> <small>Valor del proyecto</small> </strong></p>
+                    <span><img src="./resources/budget.png">
+                        <p><small class="overview__header__budget">$400.000</small></p>
+                    </span>
+                </div>
+                <div>
+                    <p><strong><small>Fecha de entrega</small></strong></p>
+                    <span><img src="./resources/deadline.png">
+                        <p><small class="overview__header__deadline">24 de feb 2022</small></p>
+                    </span>
+                </div>
+            </div>
+
+        </header>
+
+        <section class="overview">
+            <section class="overview__body">
+                <div class="container__body__projectBrief" >
+                    <h5>Brief</h5>
+                    <p class="overview__body__projectBrief">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+                        suscipit rem doloremque accusantium
+                        totam vitae voluptatibus repudiandae tenetur ex consequuntur labore eius ea, quod officia error,
+                        dolores
+                        beatae reprehenderit dolor. </p>
+                        <div class="overview__divider"></div>
+               
+                <div >
+                    <h5>Entregables</h5>
+                    <p class="overview__body__projectsRequirements">
+                        
+                           Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Magnam laborum aperiam, amet soluta
+                                nihil id mollitia sit! Non, at quasi corporis cumque nesciunt placeat minima temporibus nemo
+                                maiores eligendi facere?
+                       
+                    </p>
+                    <div class="overview__divider"></div>
+                </div>
+
+            </div>
+
+
+
+                <div id = "skills__required__container"> 
+
+                    <h5>Habilidades requeridas</h5>
+                    <div class="overview__body__skills">
+    
+    
+                        <h5>Entregables</h5>
+    
+                    </div>
+    
+                    <div class="overview__divider"></div>
+                </div>
+
+                
+                    <h5 id="overview__candidates__title">Candidatos</h5>
+
+                    
+                    <div id="overview__candidates__container">
+                   
+                </div>
+
+                
+            </section>
+
+            <aside class="overview__attached">
+
+                <h6>Archivos</h6>
+                <p><small>El cliente ha adjuntado esta carpeta con todos los insumos necesarios para el desarrollo del
+                        proyecto</small></p>
+
+
+
+                <a href="#" class="overview__attached__button"><img src="./resources/files.png">
+                    <p><small>Descargar archivos</small></p>
+                </a>
+                <div class="overview__divider"></div>
+                <h6>Links</h6>
+                <a class="overview__attached__button overview_website"><img src="./resources/website.png">
+                    <p><small>Página web</small></p>
+                </a>
+                <a class="overview__attached__button overview_linkedin"><img src="./resources/linkedin.png">
+                    <p><small>Linkedin</small></p>
+                </a>
+                </span>
+
+                <button id="DeliverBtn" class="cta_button --accented">Entregar</button>
+                <button id="ApplyBtn" class="cta_button --accented">Aplicar</button>
+
+            </aside>
+        </section>
+    </main>
+
+
+    <div id="DeliverModal" class="modal hidden">
+
+        <div class="modalPanel">
+            <div class="modalPanel__header">
+
+                <div class="modalPanel__header__info">
+                    <h5>Subir archivos</h5>
+                    <p><small>Utiliza este formato para solicitar la aprobación del trabajo que has completado. El pago
+                            será realizado una vez aprobado</small></p>
+                </div>
+
+                <button class="closeModal__btn">
+                    <img src="./resources/close.png">
+                </button>
+
+            </div>
+
+            <form action="">
+
+                <div class="textInput">
+                    <label for="title">
+                        <p><small>Titulo</small></p>
+                    </label>
+                    <input required="true" type="text" id="title" name="title"
+                        placeholder="Escribe un nombre para esta entrega">
+                </div>
+
+                <div class="textInput">
+                    <label for="description">
+                        <p> <small>Descripción de la entrega</small> </p>
+                    </label>
+                    <textarea required="true" rows="4" cols="50" name="description" id="description"
+                        placeholder="Ej: Cuentale al cliente qué se va encontrar en estos archivos o algún detalle que necesite saber"></textarea>
+                </div>
+
+                <div class="textInput">
+                    <label for="attachment">
+                        <p><small>Adjuntar link de los archivos:</small></p>
+                    </label>
+                    <input required="true" type="text" id="attachment" name="attachment"
+                        placeholder="Pega la URL de los archivos o carpeta donde hayas subido los entregables">
+                </div>
+
+                <p>
+                    <input required="true" type="checkbox" name="conditions" id="conditions">
+
+                    <small> <label for="conditions">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quas ducimus
+                            voluptatem
+                            inventore necessitatibus, ab ut assumenda distinctio doloribus optio dicta obcaecati
+                            perspiciatis, eius et consectetur, maxime accusantium nam esse.
+                        </label></small>
+                </p>
+
+                <footer>
+                    <button type="button" class="cta_button cancelBtn">Cancelar</button>
+                    <button type="submit" class="cta_button --accented">Entregar</button>
+                </footer>
+            </form>
+
+        </div>
+    </div>
+
+
+    <div id="ApplyModal" class="modal hidden">
+
+        <div class="modalPanel">
+            <div class="modalPanel__header">
+
+                <div class="modalPanel__header__info">
+                    <h5>Aceptar oferta</h5>
+
+                </div>
+
+                <button class="closeModal__btn">
+                    <img src="./resources/close.png">
+                </button>
+
+            </div>
+
+            <form id="applyModalForm">
+                <div class="textInput">
+                    <label for="message">
+                        <p> <small>Mensaje</small> </p>
+                    </label>
+                    <textarea required="true" rows="4" cols="50" name="message" id="message"
+                        placeholder="¿Tienes alguna pregunta para Laura? ¿Te quedó todo claro? Empieza con el pie derecho dejando las expectativas y responsabilidades claras&#10&#10También puedes hablar acerca de por qué eres el indicado para el trabajo ;)"></textarea>
+                </div>
+
+
+
+                <p>
+
+                    <input required="true" type="checkbox" name="conditions" id="conditions">
+
+                    <small> <label for="conditions">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quas ducimus
+                            voluptatem
+                            inventore necessitatibus, ab ut assumenda distinctio doloribus optio dicta obcaecati
+                            perspiciatis, eius et consectetur, maxime accusantium nam esse.
+                        </label></small>
+                </p>
+
+                <footer>
+                    <button type="button" class="cta_button cancelBtn">Cancelar</button>
+                    <button type="submit" class="cta_button --accented">Aplicar</button>
+                </footer>
+            </form>
+
+        </div>
+    </div>
+
+    <script type="module" src="./overview.js"></script>
+
+</body>
+
+
+
+</html>

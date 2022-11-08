@@ -1,0 +1,44 @@
+.listCard {
+  gap: 24px;
+  padding: 30px 37px;
+  background-color: white;
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listCard__image {
+  border-radius: 50px;
+  width: 80px;
+}
+
+.listCard__information {
+  flex-grow: 1;
+
+  gap: 20px;
+}
+
+.listCard__information__information {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  column-gap: 20px;
+}
+
+.listCard__information__information > span {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.listCard__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 150px;
+}

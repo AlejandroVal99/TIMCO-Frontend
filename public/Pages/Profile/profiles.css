@@ -1,0 +1,274 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+.dashboard_me__projects__nav {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.dashboard_me__projects__nav>button {
+    flex-grow: 1;
+    padding: 10px 0;
+    background-color: transparent;
+    border-style: none;
+    border-bottom: 1px solid #E0E0E0;
+    font-family: 'Barlow';
+    color: var(--indigo);
+    font-size: 18px;
+}
+
+.dashboard_me__projects__nav>button:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+.dashboard_me__projects__nav>button.selected {
+
+    border-bottom: 3px solid var(--ctaAccent);
+
+}
+
+
+.blurred {
+
+    filter: blur(4px);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    padding: 70px var(--bodyPadding);
+    padding-left: calc(var(--bodyPadding) + var(--sideNavbarWidth));
+    height: fit-content;
+}
+
+.overview {
+    display: flex;
+
+    gap: 20px;
+}
+
+.overview__divider {
+    border: 1px solid #E0E0E0;
+}
+
+.overview__header {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 32px 45px;
+    border-radius: 14px;
+    width: 100%;
+
+    background-color: white;
+}
+
+.overview__header__logo {
+
+    background-color: var(--ctaAccent);
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+}
+
+.overview__header__summary {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    flex-direction: column;
+}
+
+
+
+.overview__header__details {
+
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    gap: 20px;
+    padding-left: 33px;
+    border-left: 1px solid #E0E0E0;
+
+}
+
+
+
+.overview__header__details>div>span {
+    gap: 10px;
+    display: inline-flex;
+
+}
+
+.overview__header__projectType {
+    color: var(--darkerGray);
+}
+
+.overview__header__specialization,
+.overview__header__university {
+    color: var(--darkerGray);
+}
+
+.overview__header__specialization-img {
+    margin-right: 20px;
+}
+
+.overview__main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.overview__body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+    padding: 36px;
+    border-radius: 14px;
+    background-color: white;
+}
+
+.overview__header__specialization__icon {
+    width: 24px;
+}
+
+.overview__body__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.overview__body__skill {
+    padding: 8px 13px;
+    width: fit-content;
+    background: #E0FE68;
+    border-radius: 18px;
+}
+
+.overview__attached {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 14px;
+    padding: 30px 20px;
+    height: fit-content;
+    width: 350px;
+    border-radius: 14px;
+    background-color: white;
+}
+
+.overview__attached__button {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: transparent;
+    border-style: none;
+}
+
+.overview__reviews {
+    display: flex;
+    gap: 20px;
+}
+
+.overview__review__star {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(./resources/emptyStar.png);
+    width: 30px;
+    height: 30px;
+}
+
+.overview__review__star.filled {
+    background-image: url(./resources/fullStar.png);
+}
+
+
+.overview__body__experience__summary {
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #E0E0E0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal {
+    background-color: #1f1f1f7c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    overflow-y: auto;
+
+}
+
+.modalPanel {
+    padding: 40px 46px;
+    max-width: 800px;
+    width: 90%;
+
+    background: #F9F9F9;
+    border-radius: 10px;
+}
+
+.modalPanel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+
+
+.closeModal__btn {
+    cursor: pointer;
+    flex-shrink: 0;
+    background-color: transparent;
+    border-style: none;
+    width: 50px;
+    height: 50px
+}
+
+.modalPanel form {
+
+    gap: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modalPanel footer {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.hidden {
+    display: none;
+}

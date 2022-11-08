@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400&@800&display=swap');
+
+:root {
+    --main-bg-color: #F9F9F9;
+    --indigo: #132644;
+    --ctaAccent: #F7863C;
+    --gray: #F1F1F1;
+    --darkerGray: #BDBDBD;
+    --bodyPadding: 100px;
+    --maxBodyWidth: 1920px;
+    --sideNavbarWidth: 300px;
+
+}
+
+* {
+    -webkit-user-drag: none;
+    box-sizing: border-box;
+    margin: 0;
+    color: var(--indigo);
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 48px;
+
+    line-height: 50px;
+}
+
+h2 {
+    font-size: 42px;
+
+}
+
+h3 {
+    font-size: 38px;
+}
+
+h4 {
+    font-size: 34px;
+}
+
+h5 {
+    font-size: 30px;
+}
+
+h6 {
+    font-size: 26px;
+
+}
+
+p {
+    font-size: 24px;
+    font-family: 'Barlow', sans-serif;
+}
+
+
+
+
+
+
+@media (max-width: 900px) {
+    :root {
+        --bodyPadding: 50px;
+        --sideNavbarWidth: 100px;
+    }
+
+    h1 {
+        font-size: 36px;
+
+    }
+
+    h2 {
+        font-size: 34px;
+
+    }
+
+    h3 {
+        font-size: 32px;
+    }
+
+    h4 {
+        font-size: 30px;
+    }
+
+    h5 {
+        font-size: 26px;
+    }
+
+    h6 {
+        font-size: 24px;
+
+    }
+
+
+    p {
+        font-size: 22px;
+
+    }
+}
+
+
+@media (max-width: 500px) {
+    :root {
+        --bodyPadding: 28px;
+
+    }
+
+    h1 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    h2 {
+        font-size: 28px;
+
+    }
+
+    h3 {
+        font-size: 26px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 22px;
+    }
+
+    h6 {
+        font-size: 20px;
+
+    }
+
+
+
+    p {
+        font-size: 18px;
+
+    }
+}

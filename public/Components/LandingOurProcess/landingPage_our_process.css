@@ -1,0 +1,94 @@
+.landingPage__ourProcess {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 85px;
+    margin-bottom: 70px;
+}
+
+.landingPage__ourProcess>h1 {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.landingPage__ourProcess__process {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 92px;
+    margin-bottom: 72px;
+
+}
+
+.landingPage__ourProcess__process__step {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    flex-shrink: 0;
+
+}
+
+.landingPage__ourProcess__process__step>p {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.landingPage__ourProcess__process__separator {
+
+    margin-left: -70px;
+    width: 10%;
+
+    height: 0px;
+    align-items: center;
+    justify-content: flex-end;
+    display: flex;
+    margin-bottom: 120px;
+    /* Primario - Naranja */
+
+    border: 2px solid #F7863C;
+}
+
+.landingPage__ourProcess__process__separator>img {
+
+    transform: translate(5px, 0);
+}
+
+@media (max-width: 900px) {
+    .landingPage__ourProcess__process {
+        flex-direction: column;
+
+    }
+
+    .landingPage__ourProcess__process {
+
+        margin-top: 50px;
+        margin-bottom: 0px;
+
+    }
+
+
+    .landingPage__ourProcess__process__separator {
+
+        flex-direction: column;
+        width: 0px;
+        height: 30px;
+
+        margin-left: 0px;
+        margin-bottom: 0px;
+
+    }
+
+    .landingPage__ourProcess__process__separator>img {
+
+
+
+        transform: translate(0px, 20px) rotate(90deg);
+    }
+
+}

@@ -1,0 +1,34 @@
+.landingPage__header {
+    display: flex;
+    width: 100%;
+
+
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 35px;
+    margin-bottom: 138px;
+
+}
+
+.landingPage__header__logo {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+@media (max-width: 900px) {
+    .landingPage__header__logo__iso {
+        width: 54px;
+    }
+
+    .landingPage__header__logo__logo {
+        display: none;
+
+    }
+}

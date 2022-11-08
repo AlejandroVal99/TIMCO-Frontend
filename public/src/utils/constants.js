@@ -1,0 +1,10 @@
+export default {
+  states: {
+    UNASSIGNED_PROJECT_ID: 1,
+    ACTIVE_PROJECT_ID: 2,
+    FINISHED_PROJECT_ID: 3,
+    WAITING_PROJECT_ID: 4,
+    APPROVE_PROJECT_ID: 5,
+    REJECT_PROJECT_ID: 6,
+  },
+};

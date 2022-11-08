@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./../../LandingPage/resources/images/favicon.png" type="image/x-icon">
+
+
+    <title>Timco - Login</title>
+
+    <link rel="stylesheet" href="./../../LandingPage/variables.css">
+
+    <link rel="stylesheet" href="./../../../Components/LoginForm/login_form.css">
+
+    <link rel="stylesheet" href="./../../../Components/ClosableLid/closableLid.css">
+    <link rel="stylesheet" href="./../../../Components/CTA_Button/cta-button.css">
+    <link rel="stylesheet" href="./../../../Components/TextInput/text__input.css">
+
+
+
+    <script type="module" src="./../../../src/LoggedStudentBypasser.js"></script>
+
+</head>
+
+<body>
+
+    <div class="closelid">
+        <img src="./../../LandingPage/resources/images/isotype.png">
+        <a href="./../../../../index.html"><img src="./../../../Components/ClosableLid/resources/closeLid.png"></a>
+    </div>
+
+    <div class="login__form__container">
+
+        <img src="./../../../Components/LoginForm/resources/studentLoginCover.png">
+        <form class="login__form">
+            <h1>Iniciar sesión</h1>
+
+            <div class="textInput">
+                <label for="studentEmail">
+                    <p id="login-student-email-label">Email*</p>
+                </label>
+                <input required="true" type="email" id="studentEmail" placeholder="Email">
+            </div>
+
+            <div class="textInput">
+                <label for="studentPassword">
+                    <p id="login-student-password-label">Contraseña*</p>
+                </label>
+                <input autocomplete="current-password" required="true" type="password" id="studentPassword"
+                    placeholder="Contraseña">
+            </div>
+            <p style="display: none; margin-left: 8px;" id="email-password-error">Email o constraseña equivocada</p>
+            <button type="submit" class="cta_button --accented">Iniciar sesión</button>
+            <div class="separator"></div>
+            <p>¿Aún no tienes una cuenta? <a href="./../SignUp/signUp.html">Regístrate</a></p>
+        </form>
+    </div>
+
+    <script type="module" src="./login.js"></script>
+</body>
+
+</html>

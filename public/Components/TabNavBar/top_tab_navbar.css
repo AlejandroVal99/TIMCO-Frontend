@@ -1,0 +1,33 @@
+.top__tab__navbar {
+    display: flex;
+    width: 100%;
+    height: 65px;
+    flex-shrink: 0;
+}
+
+.top__tab__navbar>button {
+    flex: 1;
+    border-style: none;
+
+    background-color: var(--main-bg-color);
+    font-family: 'Barlow';
+    color: var(--indigo);
+    font-size: 20px;
+
+    transition-property: font-weight, border-bottom, color, background-color;
+    transition-duration: .1s;
+}
+
+.top__tab__navbar>button:disabled {
+    color: var(--darkerGray);
+}
+
+.top__tab__navbar>button:enabled:hover {
+    background-color: var(--ctaAccent);
+    color: var(--main-bg-color);
+}
+
+.top__tab__navbar>button.selected {
+    border-bottom: 3px solid var(--ctaAccent);
+    font-weight: 700;
+}

@@ -1,0 +1,52 @@
+.landingPage__main {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    margin-bottom: 82px;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-right: 46px;
+
+}
+
+
+
+.landingPage__main__info {
+    max-width: 700px;
+}
+
+.landingPage__main__info>p {
+    margin-top: 20px;
+
+}
+
+.landingPage__main__engagingBtns {
+    margin-top: 64px;
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 1200px) {
+    .landingPage__main {
+        padding-right: 0;
+        flex-direction: column;
+    }
+
+    .landingPage__main>img {
+        width: 70%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .landingPage__main>img {
+        display: none;
+    }
+
+
+    .landingPage__main__engagingBtns {
+        flex-direction: column;
+    }
+}

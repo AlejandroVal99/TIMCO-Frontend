@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timco - Desarrollo</title>
+
+    <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css">
+
+    <link rel="stylesheet" href="./details.css">
+
+    <link rel="stylesheet" href="./../../../Components/TextInput/text__input.css">
+    <link rel="stylesheet" href="./../../../Components/ClosableLid/closableLid.css">
+    <link rel="stylesheet" href="./../../../Components/TabNavBar/top_tab_navbar.css">
+    <link rel="stylesheet" href="./../../../Components/CTA_Button/cta-button.css">
+    <link rel="stylesheet" href="./../../../Components/SelectableCard/selectable_card.css">
+    <link rel="stylesheet" href="./../../../Components/BoxFileInput/boxFileInput.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="closelid">
+        <img src="./../../LandingPage/resources/images/isotype.png">
+        <img style="opacity: 0" src="./../../../Components/ClosableLid/resources/closeLid.png">
+    </div>
+
+    <nav class="top__tab__navbar">
+        <button class="selected">1. Área profesional</button>
+        <button disabled>2. Tu perfil</button>
+        <button disabled>3. Modalidad de trabajo</button>
+    </nav>
+
+    <!-- -----------------------------------
+    AREA PROFESIONAL
+    ----------------------------------- -->
+
+
+
+    <main class="details">
+        <section class="details__forms ">
+            <img src="./resources/cover02.png">
+            <form class="details__forms__form" action="">
+                <h1>Desarrollo</h1>
+                <p>Selecciona las categorías que más se adapten a lo que quieres para orientar mejor tus vacantes de
+                    práctica</p>
+
+
+                <label class="checkboxList__checkbox" for="html">
+                    <input type="checkbox" name="orientation" value="html" id="html">
+                    <p> <small>HTML/CSS</small> </p>
+                </label>
+
+                <label class="checkboxList__checkbox" for="javascript">
+                    <input type="checkbox" name="orientation" value="javascript" id="javascript">
+                    <p> <small>Javascript</small> </p>
+                </label>
+
+                <label class="checkboxList__checkbox" for="react">
+                    <input type="checkbox" name="orientation" value="react" id="react">
+                    <p> <small>React</small> </p>
+                </label>
+
+                <label class="checkboxList__checkbox" for="backend">
+                    <input type="checkbox" name="orientation" value="backend" id="backend">
+                    <p> <small>Backend</small> </p>
+                </label>
+
+                <label class="checkboxList__checkbox" for="databases">
+                    <input type="checkbox" name="orientation" value="databases" id="databases">
+                    <p> <small>Bases de datos</small> </p>
+                </label>
+
+
+                <div class="submit_buttons">
+                    <a href="./Details.html"> <button type="button" class="cta_button">Regresar</button></a>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+    </main>
+    <!-- -----------------------------------
+    TU PERFIL
+    ----------------------------------- -->
+    <main class="details hidden">
+
+        <section class="details__forms ">
+            <img src="./resources/cover04.png">
+            <form class="details__forms__form" action="">
+                <h1>Antes de continuar, <br>cuéntanos sobre ti.</h1>
+
+                <input style="display: none;" type="text" name="area" value="Development">
+
+                <div class="textInput">
+                    <label for="university">
+                        <p>¿En qué universidad estudias?*</p>
+                    </label>
+                    <input required="true" type="text" id="university" name="university"
+                        placeholder="Escribe tu universidad">
+                </div>
+
+                <div class="textInput">
+                    <label for="semester">
+                        <p>Actualmente, ¿En qué semestre estás?*</p>
+                    </label>
+                    <input required="true" type="number" id="semester" name="semester" placeholder="Semestre">
+                </div>
+
+
+                <p>Adjunta un documento que nos permita verificar*</p>
+                <p class="box__file__input">
+
+                    <label for="attachment">
+                        <a class="btn btn-primary text-light" role="button" aria-disabled="false">Adjuntar archivos <img
+                                src="./resources/clippy.png"></a>
+                        <p id="files-area">
+                            <span id="filesList">
+                                <span id="files-names"></span>
+                            </span>
+                        </p>
+                    </label>
+                    <input  type="file" name="identityFiles[]" id="attachment"
+                        style="visibility: hidden; position: absolute;" multiple />
+
+                </p>
+
+                <div class="textInput">
+                    <p>¿Es primera vez que trabajas en el área de Develop?*</p>
+                    <label for="yes">
+                        <input checked="" type="radio" name="firstTime" id="yes" value="yes">
+
+                        <p style="display: inline;">Yes</p>
+                    </label>
+
+                    <label for="no">
+                        <input type="radio" name="firstTime" id="no" value="no">
+
+                        <p style="display: inline;">No</p>
+                    </label>
+
+                </div>
+
+
+                <div class="textInput">
+                    <label for="experience">
+                        <p>Si respondiste NO, ¿Qué hiciste y por cuánto tiempo?</p>
+                    </label>
+                    <textarea required="true" rows="4" cols="50" name="experience" id="experience"
+                        placeholder="Escribe aquí tu respuesta..."></textarea>
+                </div>
+
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover04.png">
+            <form class="details__forms__form" action="">
+                <h1>Antes de continuar, <br>cuéntanos sobre ti.</h1>
+
+                <div class="textInput">
+                    <label for="linkedin">
+                        <p>¿Tienes Linkedin? Si tienes adjunta la URL de tu perfil</p>
+                    </label>
+                    <input type="text" id="linkedin" name="linkedin" placeholder="Ponla aquí">
+                </div>
+
+                <div class="textInput">
+                    <label for="portfolio">
+                        <p>¿Tienes portafolio? Adjunta la URL</p>
+                    </label>
+                    <input type="text" id="portfolio" name="portfolio" placeholder="Ponla aquí">
+                </div>
+
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="details__forms hidden" <img src="./resources/cover04.png">
+            <form class="details__forms__form" action="">
+                <h1>Pago</h1>
+                <p>En Timco reconocemos tu esfuerzo y las ganas que tienes para crecer, es por eso que por cada proyecto
+                    que finalices de manera exitosa recibirás una remuneración de acuerdo al trabajo realizado</p>
+
+                <p>Para ello necesitamos:</p>
+
+
+                <div class="textInput">
+                    <label for="bank">
+                        <p>¿En qué banco quieres recibir el dinero?</p>
+                    </label>
+                    <select required="" name="bank" id="bank">
+                        <option value="nequi">NEQUI</option>
+                        <option value="Bancolombia">Bancolombia</option>
+                    </select>
+                </div>
+
+                <div class="textInput">
+                    <label for="bankAccount">
+                        <p>Número de cuenta</p>
+                    </label>
+                    <input min="0000000000000000" max="9999999999999999" required="true" maxlength="16" minlength="16"
+                        type="number" id="bankAccount" name="bankAccount" placeholder="XXXX-XXXX-XXXX-XXXX">
+                </div>
+
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+
+
+    </main>
+    <!-- -----------------------------------
+    MODALIDADES DE TRABAJO
+    ----------------------------------- -->
+    <main class="details hidden">
+
+        <section class="details__forms">
+            <img src="./resources/cover01.png">
+            <form class="details__forms__form" action="">
+                <h1>A tu ritmo</h1>
+                <p><small>En Timco entendemos lo pesado que puede ser estudiar y trabajar al mismo tiempo, por eso
+                        queremos saber:</small>
+                <p>¿Cuál de estas modalidades se adapta a tu semestre?</p>
+
+                <input class="selectable_card_input" required type="radio" name="modality" id="flexible"
+                    value="Flexible">
+                <label class="selectable_card" for="flexible">
+                    <h2>Proyectos cortos con tiempo variable</h2>
+                    <p>En Timco entendemos lo pesado que puede ser estudiar y trabajar al mismo tiempo, por eso queremos
+                        saber</p>
+                </label>
+
+
+                <input class="selectable_card_input" required type="radio" name="modality" id="strict" value="Strict">
+                <label class="selectable_card" for="strict">
+                    <h2>Proyectos fijos por horas</h2>
+                    <p>En Timco entendemos lo pesado que puede ser estudiar y trabajar al mismo tiempo, por eso queremos
+                        saber</p>
+                </label>
+
+                <input class="selectable_card_input" required type="radio" name="modality" id="hybrid" value="Hybrid">
+                <label class="selectable_card" for="hybrid">
+                    <h2>Ambas</h2>
+                    <p>Podrás aceptar cualquier tipo de trabajo</p>
+                </label>
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+
+    </main>
+
+    <script src="./../../../Components/BoxFileInput/boxFileBehaviour.js"></script>
+
+    <script type="module" src="./details.js"></script>
+</body>
+
+</html>
