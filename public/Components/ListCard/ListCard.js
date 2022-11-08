@@ -24,7 +24,7 @@ const ListCard = (() => {
     const projectLogo = document.createElement("img");
     projectLogo.classList.add("listCard__image");
     if (type === "student") {
-      projectLogo.src = project.project.logoUri;
+      projectLogo.src = project.logoUri;
     } else if (type === "recruiter") {
       projectLogo.src = project.company.profileImage;
     }
@@ -36,7 +36,7 @@ const ListCard = (() => {
 
     const projectTitle = document.createElement("h4");
     projectTitle.classList.add("listCard__information__title");
-    projectTitle.textContent = project.project.name;
+    projectTitle.textContent = project.name;
     informationSection.appendChild(projectTitle);
 
     const projectDetails = document.createElement("div");

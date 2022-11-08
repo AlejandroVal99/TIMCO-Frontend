@@ -1,8 +1,8 @@
 import API from "./../../../src/TimcoApi.js";
 
+console.log("Ejecuto");
 document.querySelector(".login__form").addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const student = {
     email: e.target[0].value,
     password: e.target[1].value,
@@ -40,5 +40,6 @@ document.querySelector(".login__form").addEventListener("submit", async (e) => {
 });
 
 const AttemptLogin = (student) => {
+ 
   return API.LoginStudent(student);
 };

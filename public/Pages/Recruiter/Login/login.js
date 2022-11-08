@@ -1,5 +1,5 @@
 import API from "./../../../src/TimcoApi.js";
-
+console.log("Existo");
 document.querySelector(".login__form").addEventListener("submit", async (e) => {
   e.preventDefault();
 

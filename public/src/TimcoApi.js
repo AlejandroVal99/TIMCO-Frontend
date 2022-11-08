@@ -42,6 +42,7 @@ const API = (() => {
   /////////////////////////////////////////////
 
   const LoginStudent = async (student) => {
+    console.log(student)
     const request = await fetch(`${postURL}/auth/student`, {
       method: "POST",
       mode: "cors",
@@ -55,7 +56,7 @@ const API = (() => {
     }
     const currentUserId = parseJwt(response.access).data.studentId;
     const user = parseJwt(response.access).data;
-    // debugger
+    
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", response.access);
     localStorage.setItem(loggedStudentKey, currentUserId);
@@ -338,7 +339,26 @@ const API = (() => {
     }
   };
 
+  const SubmitProject = async (project) => {
+    try {
+      const request = await fetch(postURL, {
+        method: "POST",
+        body: JSON.stringify(project),
+      });
 
+      switch (request.status) {
+        case 200:
+          // Instead of storing student You should store whatever the server
+          // responds to a succesful login - it should contain user credentials
+          return true;
+        case 404:
+          alert("La petición no dió resultado");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
 
   const JoinProjectRequest = async (candidateData) => {
     try {

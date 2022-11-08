@@ -1,5 +1,5 @@
 import ListCard from "../../Components/ListCard/ListCard.js";
-import ListCard from "../../Components/ListCard/ListCard.js";
+
 import API from "../../src/TimcoApi.js";
 import parseJwt from "../../src/utils/parseJWT.js";
 import constants from "../../src/utils/constants.js";
