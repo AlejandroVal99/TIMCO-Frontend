@@ -4,6 +4,7 @@ document
   .forEach((input) => (input.min = new Date().toISOString().split("T")[0]));
 const details = {};
 const project = {};
+const currentUserData = localStorage.getItem("loggedRecruiter");
 
 const tabs = document.querySelectorAll(".top__tab__navbar>button");
 const form = {};
@@ -13,6 +14,8 @@ const screens = [];
 const projectNameHTML = document.querySelector("#summary_projectName");
 const projectBudgetHTML = document.querySelector("#summary_projectBudget");
 const projectDeadlineHTML = document.querySelector("#summary_projectDeadline");
+
+
 
 document.querySelectorAll(".top__tab__navbar>button").forEach((button, key) => {
   button.addEventListener("click", async () => {
@@ -96,9 +99,11 @@ window.PreviousSection = () => {
 };
 
 const FinishForm = async () => {
-  API.GoToRecruiterDashboard();
-  await API.SubmitProject(project);
+ // await API.createProject(project);
+ details.companyId = currentUserData;
+  console.log(details)
   API.UploadRecruiterDetails(details);
+  
 };
 
 const FillProjectSummary = () => {

@@ -35,6 +35,7 @@ document.querySelector('.login__form').addEventListener('submit', async e => {
 
 
 const AttemptRegistration =  (recruiter) => {
+    console.log(recruiter);
    return API.SignUpRecruiter(recruiter);
    
 }

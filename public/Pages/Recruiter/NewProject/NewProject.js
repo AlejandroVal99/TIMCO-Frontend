@@ -2,6 +2,8 @@ import API from "../../../src/TimcoApi.js";
 import parseJwt from "../../../src/utils/parseJWT.js";
 const companyData = localStorage.getItem("loggedRecruiter");
 
+console.log("Go")
+
 document
   .querySelectorAll('input[type="date"]')
   .forEach((input) => (input.min = new Date().toISOString().split("T")[0]));
@@ -15,6 +17,53 @@ const screens = [];
 const projectNameHTML = document.querySelector("#summary_projectName");
 const projectBudgetHTML = document.querySelector("#summary_projectBudget");
 const projectDeadlineHTML = document.querySelector("#summary_projectDeadline");
+const minPriceRangeP= document.querySelector("#minPriceRange");
+const sliderPriceP = document.querySelector('#projectBudget');
+const sliderPriceInput = document.querySelector('#projectBudgetInput');
+
+
+
+console.log(sliderPriceInput);
+
+const studentSemesterRadio = document.querySelectorAll("#studentSemester");
+
+studentSemesterRadio.forEach((e)=>{
+
+  e.addEventListener("click", (change)=>{
+    console.log("TARGET", change.target.value);
+    switch (change.target.value){
+        case "5to7":
+        console.log("5 a 7");
+        minPriceRangeP.innerHTML = "$100.000";
+        sliderPriceP.min=100000;
+        sliderPriceInput.min = 100000;
+        break;
+
+        case "7to9":
+            console.log("7 a 9");
+       
+            minPriceRangeP.innerHTML = "$300.000";
+            sliderPriceP.min=300000;
+            sliderPriceInput.min=300000;
+        break;
+
+        default:
+          console.log("Both");
+       
+          minPriceRangeP.innerHTML = "$500.000";
+          sliderPriceP.min=500000;
+          sliderPriceInput.min=500000;
+        break;
+
+    }
+
+})
+});
+
+
+console.log(studentSemesterRadio);
+
+
 
 document.querySelectorAll(".top__tab__navbar>button").forEach((button, key) => {
   button.addEventListener("click", () => {
@@ -91,17 +140,14 @@ window.PreviousSection = () => {
 };
 
 const FinishForm = async () => {
-  if (project.areaId == 1) project.serviceId = Math.floor(Math.random() * 7);
-  if (project.areaId == 2)
-    project.serviceId = Math.floor(Math.random() * 3) + 7;
-  if (project.areaId == 3)
-    project.serviceId = Math.floor(Math.random() * 4) + 10;
+
   project.stateId = 1;
   const token = localStorage.getItem("token");
   const currentUser = parseJwt(token);
   project.companyId = currentUser.data.companyId;
-  await API.UploadProject(project, token);
-  window.location.href = "./../Dashboard/dashboard.html";
+  console.log(project);
+ await API.createProject(project, token);
+//window.location.href = "./../Dashboard/dashboard.html";
 };
 
 const FillProjectSummary = () => {
@@ -112,3 +158,4 @@ const FillProjectSummary = () => {
   if (project.timelineDate && projectDeadlineHTML)
     projectDeadlineHTML.textContent = project.timelineDate;
 }; //Closes FillProjecSummary method
+

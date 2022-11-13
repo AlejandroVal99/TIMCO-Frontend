@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timco - More about you</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timco - More about you </title>
+    <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css" />
 
-    <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css">
+    <link rel="stylesheet" href="./details.css" />
 
-    <link rel="stylesheet" href="./details.css">
-
-    <link rel="stylesheet" href="./../../../Components/TextInput/text__input.css">
-    <link rel="stylesheet" href="./../../../Components/ClosableLid/closableLid.css">
-    <link rel="stylesheet" href="./../../../Components/TabNavBar/top_tab_navbar.css">
-    <link rel="stylesheet" href="./../../../Components/CTA_Button/cta-button.css">
-    <link rel="stylesheet" href="./../../../Components/SelectableCard/selectable_card.css">
-    <link rel="stylesheet" href="./../../../Components/BoxFileInput/boxFileInput.css">
+    <link
+      rel="stylesheet"
+      href="./../../../Components/TextInput/text__input.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./../../../Components/ClosableLid/closableLid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./../../../Components/TabNavBar/top_tab_navbar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./../../../Components/CTA_Button/cta-button.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./../../../Components/SelectableCard/selectable_card.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./../../../Components/BoxFileInput/boxFileInput.css"
+    />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="closelid">
-        <img src="./../../LandingPage/resources/images/isotype.png">
-        <img style="opacity: 0" src="./../../../Components/ClosableLid/resources/closeLid.png">
+      <img src="./../../LandingPage/resources/images/isotype.png" />
+      <img
+        style="opacity: 0"
+        src="./../../../Components/ClosableLid/resources/closeLid.png"
+      />
     </div>
 
     <nav class="top__tab__navbar">
-        <button class="selected">1. Tu compañía</button>
-        <button disabled>2.Modalidad de talento</button>
-        <button disabled>3. Publica tu proyecto </button>
+      <button class="selected">1. Tu compañía</button>
+      <button disabled>2.Modalidad de talento</button>
+      <!-- <button disabled>3. Publica tu proyecto </button> -->
     </nav>
 
     <!-- -----------------------------------
@@ -39,116 +57,201 @@
     ----------------------------------- -->
 
     <main class="details">
-        <section class="details__forms">
-            <img src="./resources/cover01.png">
-            <form class="details__forms__form" action="">
-                <h1>Cuéntanos sobre tu compañia</h1>
-                <p><small> Brindanos más información sobre tu empresa, para brindarselo a los estudiantes, así te podrán
-                        conocer y motivarse a trabjar junto a ti</small></p>
+      <section class="details__forms">
+        <img src="./resources/cover01.png" />
+        <form class="details__forms__form" action="">
+          <h1>Cuéntanos sobre tu compañia</h1>
+          <p>
+            <small>
+              Brindanos más información sobre tu empresa, para brindarselo a los
+              estudiantes, así te podrán conocer y motivarse a trabajar junto a
+              ti</small
+            >
+          </p>
 
-                <div class="textInput">
-                    <label for="companyName">
-                        <p>Nombre de la compañia*</p>
-                    </label>
-                    <input required="true" type="text" id="companyName" name="name"
-                        placeholder="Nombre de la compañia" >
-                </div>
+          <div class="textInput">
+            <label for="companyName">
+              <p>Nombre de la compañia*</p>
+            </label>
+            <input
+              required="true"
+              type="text"
+              id="companyName"
+              name="companyName"
+              placeholder="Nombre de la compañia"
+            />
+            <label for="companyPhone">
+              <p>Teléfono*</p>
+            </label>
+            <input
+              required="true"
+              type="text"
+              id="companyPhone"
+              name="phone"
+              placeholder="Nombre de la compañia"
+            />
+          </div>
 
-                <div class="submit_buttons">
-                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
-                    <button type="submit" class="cta_button --accented">Siguiente</button>
-                </div>
-            </form>
-        </section>
+          <div class="submit_buttons">
+            <button
+              type="button"
+              class="cta_button"
+              onclick="PreviousSection()"
+            >
+              Regresar
+            </button>
+            <button type="submit" class="cta_button --accented">
+              Siguiente
+            </button>
+          </div>
+        </form>
+      </section>
 
-        <section class="details__forms hidden">
-            <img src="./resources/cover01.png">
-            <form class="details__forms__form" action="">
-                <h1>Cuéntanos sobre tu compañia</h1>
+      <section class="details__forms hidden">
+        <img src="./resources/cover01.png" />
+        <form class="details__forms__form" action="">
+          <h1>Cuéntanos sobre tu compañia</h1>
 
-                <div class="textInput">
-                    <label for="employeesAmount">
-                        <p>Número de empleados*</p>
-                    </label>
-                    <input required="true" type="number" id="employeesAmount" 
-                        placeholder="Escribe aquí tu respuesta..." >
-                </div>
+          <div class="textInput">
+            <label for="employeesAmount">
+              <p>Número de empleados*</p>
+            </label>
+            <input
+              required="true"
+              type="number"
+              id="employeeNumber"
+              placeholder="Escribe aquí tu respuesta..."
+            />
+          </div>
 
-                <div class="textInput">
-                    <label for="companyAge">
-                        <p>Tiempo que llevas en el mercado*</p>
-                    </label>
-                    <input required="true" type="number"  id="companyAge"
-                        placeholder="Escribe aquí tu respuesta..." >
-                </div>
+          <div class="textInput">
+            <label for="companyAge">
+              <p>Tiempo que llevas en el mercado*</p>
+            </label>
+            <input
+              required="true"
+              type="number"
+              id="companyAge"
+              placeholder="Escribe aquí tu respuesta..."
+            />
+          </div>
 
-                <div class="submit_buttons">
-                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
-                    <button type="submit" class="cta_button --accented">Siguiente</button>
-                </div>
-            </form>
-        </section>
+          <div class="submit_buttons">
+            <button
+              type="button"
+              class="cta_button"
+              onclick="PreviousSection()"
+            >
+              Regresar
+            </button>
+            <button type="submit" class="cta_button --accented">
+              Siguiente
+            </button>
+          </div>
+        </form>
+      </section>
 
-        <section class="details__forms hidden">
-            <img src="./resources/cover01.png">
-            <form class="details__forms__form" action="">
-                <h1>Cuéntanos sobre tu compañia</h1>
+      <section class="details__forms hidden">
+        <img src="./resources/cover01.png" />
+        <form class="details__forms__form" action="">
+          <h1>Cuéntanos sobre tu compañia</h1>
 
-
-                <div class="textInput">
-                    <label for="companyArea">
-                        <p>Cuéntanos qué hace tu compañía*</p>
-                    </label>
-                    <textarea required="true" rows="4" cols="50" name="AboutMe" id="companyArea"
-                        placeholder="Escribe aquí tu respuesta..." ></textarea>
-                </div>
-                <div class="submit_buttons">
-                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
-                    <button type="submit" class="cta_button --accented">Siguiente</button>
-                </div>
-            </form>
-        </section>
-
-
+          <div class="textInput">
+            <label for="companyArea">
+              <p>Cuéntanos qué hace tu compañía*</p>
+            </label>
+            <textarea
+              required="true"
+              rows="4"
+              cols="50"
+              name="AboutMe"
+              id="companyArea"
+              placeholder="Escribe aquí tu respuesta..."
+            ></textarea>
+          </div>
+          <div class="submit_buttons">
+            <button
+              type="button"
+              class="cta_button"
+              onclick="PreviousSection()"
+            >
+              Regresar
+            </button>
+            <button type="submit" class="cta_button --accented">
+              Siguiente
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
 
     <!-- -----------------------------------
     MODALIDAD DE TALENTO
     ----------------------------------- -->
     <main class="details hidden">
-        <section class="details__forms">
-            <img src="./resources/cover01.png">
-            <form class="details__forms__form" action="">
+      <section class="details__forms">
+        <img src="./resources/cover01.png" />
+        <form class="details__forms__form" action="">
+          <h1>Modalidad de trabajo</h1>
+          <p>
+            <small>
+              Timco ofrece dos modalidades de contratación de talento, una por
+              proyectos y otra, por medio de vacantes. Selecciona cual de estás
+              dos opciones se adapta más a ti.</small
+            >
+          </p>
 
-                <input class="selectable_card_input" required type="radio" id="publish"
-                    value="Publish">
+          <input
+            class="selectable_card_input"
+            required
+            type="radio"
+            id="publish"
+            value="Publish"
+          />
 
-                <label class="selectable_card" for="publish">
-                    <h2>Publica un proyecto</h2>
-                    <p>Crea tu propio proyecto sin costo y adaptado a tus requerimientos. </p>
-                </label>
+          <label class="selectable_card" for="publish">
+            <h2>Publica un proyecto</h2>
+            <p>
+              Crea tu propio proyecto sin costo y adaptado a tus requerimientos.
+            </p>
+          </label>
 
+          <input
+            class="selectable_card_input"
+            required
+            type="radio"
+            name="companyHireMode"
+            id="search"
+            value="Search"
+          />
 
-                <input class="selectable_card_input" required type="radio" name="companyHireMode" id="search"
-                    value="Search">
-
-                <label class="selectable_card" for="search">
-                    <h2>Vacantes empresariales</h2>
-                    <p>Encontramos el candidato ideal para ti, para que escojas al que más se adapta a ti y puedes
-                        cultivar su desarrollo</p>
-                </label>
-                <div class="submit_buttons">
-                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
-                    <button type="submit" class="cta_button --accented">Siguiente</button>
-                </div>
-            </form>
-        </section>
-
+          <label class="selectable_card" for="search">
+            <h2>Vacantes empresariales</h2>
+            <p>
+              Encontramos el candidato ideal para ti, para que escojas al que
+              más se adapta a ti y puedes cultivar su desarrollo
+            </p>
+          </label>
+          <div class="submit_buttons">
+            <button
+              type="button"
+              class="cta_button"
+              onclick="PreviousSection()"
+            >
+              Regresar
+            </button>
+            <!-- <button type="button" class="cta_button" id="finishDetailForm">Terminar Registro</button> -->
+            <button type="submit" class="cta_button --accented">
+              Terminar Registro
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
     <!-- -----------------------------------
    PUBLICA TU PROYECTO
     ----------------------------------- -->
-    <main class="details hidden">
+    <!-- <main class="details hidden">
         <section class="details__forms">
             <form class="details__forms__form  mainCardsForm" action="">
 
@@ -369,11 +472,10 @@
                 </div>
             </form>
         </section>
-    </main>
+    </main> -->
 
     <script src="./../../../Components/BoxFileInput/boxFileBehaviour.js"></script>
     <script src="./../../../Components/CurrencyInput/currencyInput.js"></script>
     <script type="module" src="./details.js"></script>
-</body>
-
+  </body>
 </html>

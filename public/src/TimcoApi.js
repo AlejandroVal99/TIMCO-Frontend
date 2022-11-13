@@ -74,21 +74,28 @@ const API = (() => {
 
     if (response.error) return response.error;
     let currentUserId = parseJwt(response.accessToken).data;
+    console.log(currentUserId);
     localStorage.setItem(loggedStudentKey, currentUserId);
-    localStorage.setItem("token", response.access);
+    localStorage.setItem("token", response.accessToken);
     GoToStudentDetails();
   };
   //Closes SignUpRecruiter method
 
   const UploadStudentDetails = async (details) => {
+    const token = localStorage.getItem("token");
+
     try {
-      const request = await fetch(postURL, {
-        method: "POST",
+      const request = await fetch(`${postURL}/student`, {
+        method: "PUT",
         body: JSON.stringify(details),
-      });
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
+    });
       switch (request.status) {
         case 200:
-          GoToStudentDashboard();
+          SignOutStudent();
           break;
         case 404:
           alert("La petición no dió resultado");
@@ -127,9 +134,9 @@ const API = (() => {
     });
     const response = await request.json();
     if (response.error) return response.error;
-
-    const currentUserId = parseJwt(response.access).data;
+     let currentUserId = parseJwt(response.accessToken).data;
     localStorage.setItem(loggedRecruiterKey, currentUserId);
+    localStorage.setItem("token", response.access);
     GoToRecruiterDetails();
   }; //Closes SignUpRecruiter method
 
@@ -154,19 +161,24 @@ const API = (() => {
   //Closes LoginRecruiter Method
 
   const UploadRecruiterDetails = async (details) => {
+    token = localStorage.getItem("token");
     try {
       const request = await fetch(`${postURL}/company`, {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(details),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
       switch (request.status) {
         case 200:
           // Instead of storing student You should store whatever the server
           // responds to a succesful login - it should contain user credentials
-          GoToRecruiterDashboard();
+          SignOutRecruiter();
           break;
 
-        case 404:
+        case 401:
           alert("La petición no dió resultado");
           break;
       }
@@ -404,6 +416,31 @@ const API = (() => {
     }
   }; //Closes UploadStudentDetails method
 
+
+  const createProject = async (project, token) => {
+    token = localStorage.getItem("token");
+    try {
+      const request = await fetch(`${postURL}/project`, {
+        method: "POST",
+        body: JSON.stringify(project),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      switch (request.status) {
+        case 200:
+          console.log(request.json());
+          break;
+        case 404:
+          alert("La petición no dió resultado");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  }; //Closes UploadProjects method
+
   //Method for load data for current user logged
   const loadCurrentUserData = async () => {
     if (IsRecruiterLogged()) {
@@ -468,6 +505,7 @@ const API = (() => {
     GoToStudentDetails,
     GoToStudentLogin,
     SubmitProject,
+    createProject,
     JoinProjectRequest,
     GetActiveProjectsByStudent,
     GetActiveProjects,

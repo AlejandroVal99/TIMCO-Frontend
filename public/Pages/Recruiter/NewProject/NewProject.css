@@ -84,7 +84,17 @@ body {
     gap: 30px;
     justify-content: flex-end;
 }
+.checkboxList__checkbox {
+    display: inline-flex;
+    justify-content: center;
 
+    gap: 20px;
+    width: fit-content;
+}
+
+.checkboxList__checkbox>input {
+    width: 30px;
+}
 
 @media (max-width: 1300px) {
     .details__forms>img {

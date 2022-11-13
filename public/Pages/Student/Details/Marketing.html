@@ -94,14 +94,21 @@
             <form class="details__forms__form" action="">
                 <h1>Antes de continuar, <br>cuéntanos sobre ti.</h1>
 
-                <input style="display: none;" type="text" name="area" value="Marketing">
+                <input style="display: none;" type="text" name="areaId" value="3">
 
                 <div class="textInput">
                     <label for="university">
                         <p>¿En qué universidad estudias?*</p>
                     </label>
                     <input required="true" type="text" id="universityId" name="universityId"
-                        placeholder="Escribe tu universidad">
+                        placeholder="Escribe tu universidad" >
+                </div>
+
+                <div class="textInput">
+                    <label for="semester">
+                        <p>¿Qué carrera estas cursando?*</p>
+                    </label>
+                    <input required="true" id="semester" name="career" placeholder="Diseño de Medios Interactivos   ">
                 </div>
 
                 <div class="textInput">
@@ -179,6 +186,41 @@
                         <p>¿Tienes portafolio? Adjunta la URL</p>
                     </label>
                     <input type="text" id="portfolio" name="portfolio" placeholder="Ponla aquí">
+                </div>
+
+
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
+
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover04.png">
+            <form class="details__forms__form" action="">
+                <h1>Antes de continuar, <br>cuéntanos sobre ti.</h1>
+
+                <div class="textInput">
+                    <label for="aboutMe">
+                      <p>Cuéntanos un poco sobre ti*</p>
+                    </label>
+                    <textarea
+                      required="true"
+                      rows="4"
+                      cols="50"
+                      name="aboutMe"
+                      id="aboutMe"
+                      placeholder="Cuentanos quienes eres, a qué te dedicas y que capacidades tienes..."
+                    ></textarea>
+                  </div>
+
+                <div class="textInput">
+                    <label for="phone">
+                        <p>Teléfono</p>
+                    </label>
+                    <input type="text" id="phone" name="phone" placeholder="Ponla aquí">
                 </div>
 
 

@@ -1,12 +1,19 @@
 import API from "../../../src/TimcoApi.js";
+import parseJWT from "../../../src/utils/parseJWT.js"
 document.querySelectorAll('input[type="date"]').forEach(input => input.min = new Date().toISOString().split("T")[0]);
 const details = {};
 
 
 const tabs = document.querySelectorAll(".top__tab__navbar>button");
 const form = {}
-
 const screens = [];
+
+
+const token = localStorage.getItem("token");
+const userData = parseJWT(token);
+console.log(userData); 
+
+
 
 document.querySelectorAll(".top__tab__navbar>button").forEach((button, key) => {
     button.addEventListener('click', () => {
@@ -114,13 +121,23 @@ window.PreviousSection = () => {
 }
 
 const FinishForm = async () => {
+    
+    details.studentId = userData.data.studentId;
+    details.name = userData.data.name;
+    details.email = userData.data.email;
+    details.universityId = 1;
+    
+
+    console.log(details);
     API.UploadStudentDetails(details);
+
 }
 
 
 
 
 SetCurrentScreen(0);
+
 
 
 
