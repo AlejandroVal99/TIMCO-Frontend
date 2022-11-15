@@ -1,10 +1,14 @@
 import API from "../../../src/TimcoApi.js";
+import parseJWT from "../../../src/utils/parseJWT.js";
+
 document
   .querySelectorAll('input[type="date"]')
   .forEach((input) => (input.min = new Date().toISOString().split("T")[0]));
 const details = {};
 const project = {};
-const currentUserData = localStorage.getItem("loggedRecruiter");
+
+const token = localStorage.getItem("token");
+const currentUserData = parseJWT(token).data;
 
 const tabs = document.querySelectorAll(".top__tab__navbar>button");
 const form = {};
