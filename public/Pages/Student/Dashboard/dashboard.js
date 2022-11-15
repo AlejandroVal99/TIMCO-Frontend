@@ -57,7 +57,7 @@ const LoadVacancies = async () => {
     entityId: userData.studentId,
   });
   let projectsFilter = projectsData.data.filter((project) => {
-    debugger;
+    //debugger;
     if (!candidateProjectsIds.includes(project.projectId)) {
       return project.state.stateId === constants.states.UNASSIGNED_PROJECT_ID;
     }
