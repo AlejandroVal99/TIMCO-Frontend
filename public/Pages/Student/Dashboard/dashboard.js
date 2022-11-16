@@ -104,6 +104,12 @@ const drawProjectsByState = (state) => {
     projectsFilter = projectsFilter.map(({ project }, index) => {
       return { ...project, state: candidateProjects[index].state };
     });
+  } else if (state === constants.states.FINISHED_PROJECT_ID) {
+    projectsFilter = projects.filter(
+      (project) =>
+        project.state.stateId === state ||
+        project.state.stateId === constants.states.REJECT_PROJECT_ID
+    );
   } else {
     projectsFilter = projects.filter(
       (project) => project.state.stateId === state
@@ -121,6 +127,7 @@ const drawProjectsByState = (state) => {
 };
 
 const drawProjects = ({ projects = [] }) => {
+  debugger;
   myProjectsContainer.innerHTML = null;
 
   projects.forEach((project) => {
@@ -139,9 +146,8 @@ const drawProjects = ({ projects = [] }) => {
             visible: "true",
             onclick: () => OnProjectClicked({ id: project.projectId }),
           },
-          type: 'recruiter'
+          type: "recruiter",
         });
-
         break;
       case constants.states.FINISHED_PROJECT_ID:
         card = ListCard.CreateProjectCard({
@@ -154,7 +160,21 @@ const drawProjects = ({ projects = [] }) => {
             visible: "true",
             onclick: () => OnProjectClicked({ id: project.projectId }),
           },
-          type: 'recruiter'
+          type: "recruiter",
+        });
+        break;
+      case constants.states.REJECT_PROJECT_ID:
+        card = ListCard.CreateProjectCard({
+          project: project.project,
+          primaryBtn: {
+            visible: false,
+          },
+          secondaryBtn: {
+            label: "Ver Brief",
+            visible: "true",
+            onclick: () => OnProjectClicked({ id: project.projectId }),
+          },
+          type: "recruiter",
         });
         break;
       case constants.states.WAITING_PROJECT_ID:
@@ -168,7 +188,7 @@ const drawProjects = ({ projects = [] }) => {
             visible: "true",
             onclick: () => OnProjectClicked({ id: project.projectId }),
           },
-          type: 'recruiter'
+          type: "recruiter",
         });
         break;
     }

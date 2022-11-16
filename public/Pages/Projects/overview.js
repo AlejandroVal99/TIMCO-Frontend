@@ -8,6 +8,7 @@ import { timeFromNow } from "../../src/utils/timeHelper.js";
 import currencyFormatter from "../../src/utils/currencyHelper.js";
 
 let candidates = [];
+let userData = {};
 
 const urlParams = new URLSearchParams(window.location.search);
 const IsRecruiterLogged = API.IsRecruiterLogged();
@@ -65,15 +66,16 @@ btnReturnToDashBoard.addEventListener("click", () => {
 
 const getUserData = () => {
   const token = localStorage.getItem("token");
-  const userData = parseJwt(token);
-  let userName = userData.data.name;
+  userData = parseJwt(token).data;
+  console.log('1. USER DATA:', userData);
+  let userName = userData.name;
   let userDetail;
 
   if (API.IsRecruiterLogged()) {
     userDetail = "Recruiter";
-    ProfilePicture.src = userData.data.profileImage;
+    ProfilePicture.src = userData.profileImage;
   } else {
-    userDetail = userData.data.area.name;
+    userDetail = userData.area.name;
   }
 
   const userNameSideBar = document.getElementById("userCurrentName");
@@ -81,6 +83,8 @@ const getUserData = () => {
 
   userNameSideBar.innerHTML = userName;
   userDetailSideBar.innerHTML = userDetail;
+
+  RenderProjectData(projectKey);
 };
 
 const candidatesTitle = document.querySelector("#overview__candidates__title");
@@ -188,11 +192,11 @@ if (ApplyModal) {
   ApplyModal.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
-    const userData = parseJwt(token);
+    // const token = localStorage.getItem("token");
+    // const userData = parseJwt(token);
     const Request = {};
 
-    Request.studentId = userData.data.studentId;
+    Request.studentId = userData.studentId;
     Request.companyId = projectData.companyId;
     Request.projectId = projectData.projectId;
     Request.stateId = constants.states.WAITING_PROJECT_ID;
@@ -237,9 +241,9 @@ const drawCandidateCard = (candidates) => {
     return;
   }
 
-// New candidate Card component
+  // New candidate Card component
   candidates.forEach((candidate) => {
-    companyId = candidate.companyId;
+    // companyId = candidate.companyId;
     studentId = candidate.student.studentId;
 
     const card = CandidateCard.CreateCandidateCard({
@@ -265,13 +269,10 @@ const drawCandidateCard = (candidates) => {
       },
     });
 
-
-     
     candidatesContainer.appendChild(card);
   });
 
-
-//Old Candidate Card Component
+  //Old Candidate Card Component
 
   // candidates.forEach((candidate) => {
   //   // candidateId = candidate.candidateId;
@@ -303,13 +304,8 @@ const drawCandidateCard = (candidates) => {
   //     },
   //   });
 
-
-     
   //   candidatesContainer.appendChild(card);
   // });
-
-
-
 };
 
 const onAcceptCandidate = async ({ candidateId, studentId }) => {
@@ -328,6 +324,17 @@ const onAcceptCandidate = async ({ candidateId, studentId }) => {
     projectId: data.projectId,
     studentId: data.studentId,
     stateId: constants.states.ACTIVE_PROJECT_ID,
+  });
+
+  // Rechazar a los otros candidatos
+  const othersCandidates = candidates.filter(
+    (candidate) => candidate.candidateId !== parseInt(candidateId)
+  );
+  othersCandidates.forEach((rejectCandidate) => {
+    API.PutCandidateProject({
+      candidateId: rejectCandidate.candidateId,
+      stateId: constants.states.REJECT_PROJECT_ID,
+    });
   });
 
   location.reload();
@@ -349,6 +356,7 @@ const setProjectBadgeState = (label, color, stateClass) => {
 };
 
 const FillInformation = (projectData) => {
+  debugger;
   if (!projectData) return;
 
   ProjectRequirements.innerHTML = null;
@@ -380,6 +388,11 @@ const FillInformation = (projectData) => {
       break;
   }
 
+  console.log('USER DATA:', userData)
+  if(projectData.studentId !== userData.studentId) {
+    setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
+  }
+
   if (ProjectBudget)
     ProjectBudget.textContent = currencyFormatter(projectData.priceTotal);
   if (ProjectDeadline) {
@@ -409,8 +422,12 @@ const FillInformation = (projectData) => {
   if (ProjectRequirements) {
     ProjectSkills.innerHTML = null;
 
-    if (projectData.deliverables === null || projectData.deliverables === undefined) {
-      ProjectRequirements.textContent = 'El reclutador aún no adjuntado entregables.';
+    if (
+      projectData.deliverables === null ||
+      projectData.deliverables === undefined
+    ) {
+      ProjectRequirements.textContent =
+        "El reclutador aún no adjuntado entregables.";
     } else {
       ProjectRequirements.textContent = projectData.deliverables;
     }
@@ -434,10 +451,8 @@ const FillInformation = (projectData) => {
   // if (WebsiteButton) WebsiteButton.href = projectData.species.url;
   // if (LinkedInButton)
   //   LinkedInButton.href = projectData.location_area_encounters;
-
- 
 };
 
-RenderProjectData(projectKey);
+// RenderProjectData(projectKey);
 getUserData();
 // loadCandidates(projectKey);
