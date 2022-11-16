@@ -22,10 +22,14 @@ main {
 
 #dashboard__vacancies {
     flex-shrink: 0;
-    padding: 40px 0;
+    display: flex;
+    /* padding: 40px 0; */
     overflow-x: auto;
     display: flex;
-    gap: 32px;
+    flex-direction: column;
+    gap: 1px;
+    /* gap: 32px; */
+    background-color: #E0E0E0;
 }
 
 
@@ -52,7 +56,7 @@ main {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    width: 100%;
+    min-width: 100%;
 
     background: #FFFFFF;
     border-radius: 14px;
@@ -81,7 +85,6 @@ main {
 }
 
 .dashboard_me__projects__nav>button.selected {
-
     border-bottom: 3px solid var(--ctaAccent);
 
 }

@@ -1,5 +1,5 @@
 import ListCard from "../../../Components/ListCard/ListCard.js";
-import ProjectCard from "../../../Components/ProjectCard/ProjectCard.js";
+import ZeroItems from "../../../Components/ZeroItems/ZeroItems.js";
 import constants from "../../../src/utils/constants.js";
 import API from "./../../../src/TimcoApi.js";
 import codedecJwt from "./../../../src/utils/parseJWT.js";
@@ -53,6 +53,9 @@ const loadNewProjectButton = () => {
 };
 
 const LoadProjects = async () => {
+  if (!myProjectsContainer) return;
+  myProjectsContainer.innerHTML = null;
+
   const token = localStorage.getItem("token");
   if (token !== null) {
     const company = codedecJwt(token).data;
@@ -60,15 +63,21 @@ const LoadProjects = async () => {
       entityId: company.companyId,
       entityType: "company",
     });
-    if (projects.data.length === 0) return;
     projects = projects.data;
+    if (projects.length === 0) {
+      const zeroDataEle = ZeroItems.CreateZeroItemsCard({
+        state: constants.states.ACTIVE_PROJECT_ID,
+      });
+      myProjectsContainer.appendChild(zeroDataEle);
+      return;
+    }
     drawProjectsByState(constants.states.ACTIVE_PROJECT_ID);
   }
 }; //Closes LoadVacancies method
 
 const drawProjectsByState = (state) => {
   let projectsFilter;
-  if (state === 4) {
+  if (state === constants.states.WAITING_PROJECT_ID) {
     projectsFilter = projects.filter(
       (project) =>
         project.state.stateId === state || project.state.stateId === 1
@@ -77,6 +86,15 @@ const drawProjectsByState = (state) => {
     projectsFilter = projects.filter(
       (project) => project.state.stateId === state
     );
+  }
+
+  if (projectsFilter.length === 0) {
+    const zeroDataEle = ZeroItems.CreateZeroItemsCard({
+      state,
+    });
+    myProjectsContainer.innerHTML = null;
+    myProjectsContainer.appendChild(zeroDataEle);
+    return;
   }
 
   drawProjects({ projects: projectsFilter });
@@ -96,6 +114,7 @@ const drawProjects = ({ projects = [] }) => {
       secondaryBtn: {
         visible: false,
       },
+      type: 'recruiter'
     });
     if (!card) return;
     myProjectsContainer.appendChild(card);
@@ -111,12 +130,21 @@ const OnProjectClicked = ({ projectId }) => {
 };
 
 activeTabEle.addEventListener("click", function () {
+  activeTabEle.classList.add("selected");
+  finishedTabEle.classList.remove("selected");
+  waitingTabEle.classList.remove("selected");
   drawProjectsByState(constants.states.ACTIVE_PROJECT_ID);
 });
 finishedTabEle.addEventListener("click", function () {
+  finishedTabEle.classList.add("selected");
+  activeTabEle.classList.remove("selected");
+  waitingTabEle.classList.remove("selected");
   drawProjectsByState(constants.states.FINISHED_PROJECT_ID);
 });
 waitingTabEle.addEventListener("click", function () {
+  waitingTabEle.classList.add("selected");
+  activeTabEle.classList.remove("selected");
+  finishedTabEle.classList.remove("selected");
   drawProjectsByState(constants.states.WAITING_PROJECT_ID);
 });
 

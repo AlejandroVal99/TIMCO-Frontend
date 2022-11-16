@@ -1,46 +1,53 @@
 .projectCard {
-    padding: 15px 24px;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    box-shadow: 0px -4px 45px rgba(22, 22, 22, 0.055);
-    border-radius: 14px;
-    background-color: #F7863C;
-    width: 300px;
-    gap: 10px;
-    align-items: flex-start;
+  padding: 15px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-shadow: 0px -4px 45px rgba(22, 22, 22, 0.055);
+  border-radius: 14px;
+  background-color: #f7863c;
+  width: 300px;
+  gap: 10px;
+  align-items: flex-start;
 }
 
 .projectCard__thumbnail {
+  width: 3.3rem;
+  height: 3.3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
-    width: 37px;
+.projectCard__title,
+.projectCard__owner {
+  text-transform: capitalize;
 }
 
 .projectCard__budget,
 .projectCard__deadline {
-    gap: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: fit-content;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
 }
 
 .projectCard button {
-    width: 100%;
-    align-self: center;
+  width: 100%;
+  align-self: center;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .projectCard.new {
-    height: 100%;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: 2px dashed #132644;
-    filter: drop-shadow(0px -11px 45px rgba(22, 22, 22, 0.1));
-    border-radius: 14px;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 2px dashed #132644;
+  filter: drop-shadow(0px -11px 45px rgba(22, 22, 22, 0.1));
+  border-radius: 14px;
 }

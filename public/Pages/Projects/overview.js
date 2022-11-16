@@ -1,8 +1,10 @@
 import ListCard from "../../Components/ListCard/ListCard.js";
-
+import ZeroItems from "../../Components/ZeroItems/ZeroItems.js";
 import API from "../../src/TimcoApi.js";
 import parseJwt from "../../src/utils/parseJWT.js";
 import constants from "../../src/utils/constants.js";
+import { timeFromNow } from "../../src/utils/timeHelper.js";
+import currencyFormatter from "../../src/utils/currencyHelper.js";
 
 let candidates = [];
 
@@ -87,6 +89,15 @@ const candidatesContainer = document.querySelector(
 if (usertype != "recruiter") {
   if (candidatesTitle) candidatesTitle.remove();
   if (candidatesContainer) candidatesContainer.remove();
+  if (
+    projectData.state.stateId === constants.states.FINISHED_PROJECT_ID ||
+    projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID
+  ) {
+    if (DeliverButton) {
+      // DeliverButton.disabled = true;
+      DeliverButton.remove();
+    }
+  }
 } else {
   if (DeliverButton) DeliverButton.remove();
   if (ApplyButton) ApplyButton.remove();
@@ -181,9 +192,10 @@ if (ApplyModal) {
     Request.studentId = userData.data.studentId;
     Request.companyId = projectData.companyId;
     Request.projectId = projectData.projectId;
-    Request.stateId = 4;
+    Request.stateId = constants.states.WAITING_PROJECT_ID;
 
     const candidate = await API.JoinProjectRequest(Request);
+    debugger;
     if (candidate) {
       // alert("Petición enviada exitosamente");
       window.location.reload();
@@ -203,10 +215,10 @@ const RenderProjectData = async (key) => {
   if (!key) return;
   FillInformation(projectData);
 };
+
 const loadCandidates = async (projectKey) => {
   const candidatesData = await API.GetCandidatesByProjectId(projectKey);
   candidates = candidatesData;
-  console.log("LOAD CANDIDATES DATA", candidates);
   drawCandidateCard(candidatesData, projectKey);
 };
 
@@ -214,6 +226,13 @@ const drawCandidateCard = (candidates, projectId) => {
   // let candidateId,
   let companyId,
     studentId = 0;
+
+  if (!candidates || candidates.length === 0) {
+    candidatesContainer.appendChild(
+      ZeroItems.CreateZeroItemsCard({ label: "candidatos", showState: false })
+    );
+    return;
+  }
 
   candidates.forEach((candidate) => {
     // candidateId = candidate.candidateId;
@@ -264,7 +283,7 @@ const onAcceptCandidate = async ({ candidateId, studentId }) => {
     projectId: data.projectId,
     studentId: data.studentId,
     stateId: constants.states.ACTIVE_PROJECT_ID,
-  }, );
+  });
 
   location.reload();
 };
@@ -282,19 +301,49 @@ const FillInformation = (projectData) => {
   if (!projectData) return;
 
   ProjectRequirements.innerHTML = null;
-  //   if (ProjectLogo) ProjectLogo.src = projectData.sprites.front_default;
+  if (ProjectLogo) ProjectLogo.src = projectData.company.profileImage;
   if (ProjectName) ProjectName.textContent = projectData.name;
   if (ProjectType) ProjectType.textContent = projectData.service.name;
   if (ProjectDescription)
     ProjectDescription.textContent = projectData.description;
 
-  if (ProjectBudget) ProjectBudget.textContent = projectData.priceTotal;
-  if (ProjectDeadline) ProjectDeadline.textContent = projectData.timelineDate;
+  if (ProjectBudget)
+    ProjectBudget.textContent = currencyFormatter(projectData.priceTotal);
+  if (ProjectDeadline) {
+    const projectTimeData = timeFromNow(projectData.timelineDate);
+    switch (projectTimeData.when) {
+      case "past":
+        ProjectDeadline.textContent = `Finalizo hace ${projectTimeData.time} ${projectTimeData.unitOfTime}`;
+        break;
+      case "future":
+        const timelineDate = new Date(projectData.timelineDate);
+        ProjectDeadline.textContent = timelineDate.toLocaleDateString("es-CO", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+        // ProjectDeadline.textContent = projectData.timelineDate;
+        // ProjectDeadline.textContent = `${projectTimeData.time} ${projectTimeData.unitOfTime}`;
+        break;
+      default:
+        ProjectDeadline.textContent = projectData.timelineDate;
+        break;
+    }
+  }
 
   if (ProjectBrief) ProjectBrief.textContent = projectData.description;
 
   if (ProjectRequirements) {
-    ProjectRequirements.textContent = projectData.deliverables;
+    if (!projectData.deliverables) {
+      ProjectRequirements.appendChild(
+        ZeroItems.CreateZeroItemsCard({
+          label: "entregables",
+          showState: false,
+        })
+      );
+    } else {
+      ProjectRequirements.textContent = projectData.deliverables;
+    }
     ProjectSkills.innerHTML = null;
 
     const { skills } = projectData.service;
@@ -319,8 +368,6 @@ const FillInformation = (projectData) => {
   if (WebsiteButton) WebsiteButton.href = projectData.species.url;
   if (LinkedInButton)
     LinkedInButton.href = projectData.location_area_encounters;
-
-
 };
 
 RenderProjectData(projectKey);
