@@ -4,8 +4,7 @@ import API from "../../src/TimcoApi.js";
 const urlParams = new URLSearchParams(window.location.search);
 
 const profileId = urlParams.get("profileId");
-const owned = !!urlParams.get("owned");
-const usertype = urlParams.get("user");
+
 
 const ProfileImage = document.querySelector(".overview__header__logo");
 const ProfileName = document.querySelector(".overview__header__profileName");
@@ -42,20 +41,22 @@ const experienceCard = document.querySelector(
 
 const RenderProfileData = async (key) => {
   if (!key) return;
-  const profileData = await API.GetProfileByID(key);
+  const profileData = await API.GetProfileByID("1b14bcb9-1c05-44e6-8bcb-c0136b333d9c");
+
   FillInformation(profileData);
 };
 
 const FillInformation = (profileData) => {
+  console.log("NAME",profileData.data.aboutMe)
   if (!profileData) return;
 
-  if (ProfileImage) ProfileImage.src = profileData.sprites.front_default;
-  if (ProfileName) ProfileName.textContent = profileData.name;
+  if (ProfileImage) ProfileImage.src = API.GetStaticRoute(`Components/Sidebar/resources/profilePicture.png`);
+  if (ProfileName) ProfileName.textContent = profileData.data.name;
   if (ProfileUniversity)
-    ProfileUniversity.textContent = profileData.types[0].type.name;
-  if (ProfileTypeIcon) ProfileTypeIcon.src = profileData.sprites.front_default;
+    ProfileUniversity.textContent = profileData.data.university.name;
+  //if (ProfileTypeIcon) ProfileTypeIcon.src = profileData.sprites.front_default;
 
-  if (ProfileDescription) ProfileDescription.textContent = profileData.pokedex;
+  if (ProfileDescription) ProfileDescription.textContent = profileData.data.aboutMe;
 
   if (ProfileBrief) ProfileBrief.textContent = profileData.pokedex;
 

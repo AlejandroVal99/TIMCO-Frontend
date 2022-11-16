@@ -1,4 +1,5 @@
 import ListCard from "../../Components/ListCard/ListCard.js";
+import CandidateCard from "../../Components/CandidateCard/candidateCard.js";
 import ZeroItems from "../../Components/ZeroItems/ZeroItems.js";
 import API from "../../src/TimcoApi.js";
 import parseJwt from "../../src/utils/parseJWT.js";
@@ -235,13 +236,14 @@ const drawCandidateCard = (candidates, projectId) => {
     return;
   }
 
+// New candidate Card component
   candidates.forEach((candidate) => {
     // candidateId = candidate.candidateId;
     companyId = candidate.companyId;
     studentId = candidate.student.studentId;
 
-    const card = ListCard.CreateProjectCard({
-      project: {
+    const card = CandidateCard.CreateCandidateCard({
+      candidate: {
         id: candidate.candidateId,
         studentId: studentId,
         name: candidate.student.name || "student name",
@@ -264,8 +266,52 @@ const drawCandidateCard = (candidates, projectId) => {
         visible: true,
       },
     });
+
+
+     
     candidatesContainer.appendChild(card);
   });
+
+
+//Old Candidate Card Component
+
+  // candidates.forEach((candidate) => {
+  //   // candidateId = candidate.candidateId;
+  //   companyId = candidate.companyId;
+  //   studentId = candidate.student.studentId;
+
+  //   const card = ListCard.CreateProjectCard({
+  //     project: {
+  //       id: candidate.candidateId,
+  //       studentId: studentId,
+  //       name: candidate.student.name || "student name",
+  //       logoUri: candidate.student.profileImage || "pic",
+  //     },
+  //     primaryBtn: {
+  //       label: "Aceptar",
+  //       onclick: ({ candidateId, studentId }) => {
+  //         onAcceptCandidate({ candidateId, studentId });
+  //       },
+  //       visible: true,
+  //     },
+  //     secondaryBtn: {
+  //       label: "Rechazar",
+  //       onclick: (candidateId) => {
+  //         onRejectCandidate(candidateId);
+  //       },
+  //       // onclick: () =>
+  //       //   onRejectCandidate({ candidateId, companyId, projectId, studentId }),
+  //       visible: true,
+  //     },
+  //   });
+
+
+     
+  //   candidatesContainer.appendChild(card);
+  // });
+
+
+
 };
 
 const onAcceptCandidate = async ({ candidateId, studentId }) => {
@@ -388,13 +434,11 @@ const FillInformation = (projectData) => {
   if (candidatesContainer) {
   }
 
-  if (WebsiteButton) WebsiteButton.href = projectData.species.url;
-  if (LinkedInButton)
-    LinkedInButton.href = projectData.location_area_encounters;
+  // if (WebsiteButton) WebsiteButton.href = projectData.species.url;
+  // if (LinkedInButton)
+  //   LinkedInButton.href = projectData.location_area_encounters;
 
-  if (WebsiteButton) WebsiteButton.href = projectData.species.url;
-  if (LinkedInButton)
-    LinkedInButton.href = projectData.location_area_encounters;
+ 
 };
 
 RenderProjectData(projectKey);

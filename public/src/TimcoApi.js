@@ -16,6 +16,11 @@ const API = (() => {
   const postURL = `${toiletApi}/api/v1`;
   const getURL = `https://pokeapi.co/api/v2`;
 
+
+  const GoToProfileStudent = (param) => {
+    GoTo(`Pages/Profile/profiles.html?studentId=${param}`);
+  }
+
   const GoToRecruiterDashboard = () => {
     GoTo("Pages/Recruiter/Dashboard/dashboard.html");
   };
@@ -312,14 +317,12 @@ const API = (() => {
 
   const GetProfileByID = async (profileID) => {
     try {
-      const request = await fetch(`${getURL}/pokemon/${profileID}`);
+      const request = await fetch(`${postURL}/student/${profileID}`);
 
       switch (request.status) {
         case 200:
           const data = await request.json();
-          data.pokedex = await fetch(`${getURL}/pokemon-species/${profileID}`);
-          data.pokedex = await data.pokedex.json();
-          data.pokedex = data.pokedex.flavor_text_entries[20].flavor_text;
+          console.log(data);
 
           return data;
 

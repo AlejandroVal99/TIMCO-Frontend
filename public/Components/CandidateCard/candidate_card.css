@@ -1,0 +1,54 @@
+.candidateCard {
+    gap: 24px;
+    padding: 30px 37px;
+    background-color: white;
+    width: 100%;
+  
+    display: flex;
+  
+    align-items: center;
+    justify-content: space-between;
+  }
+  .candidateCard__information__header{
+    display: flex;
+  }
+  .candidateCard__image {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  
+  .candidateCard__information {
+    flex-grow: 1;
+  
+    gap: 20px;
+  }
+  
+  .candidateCard__information__information {
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 20px;
+    text-transform: capitalize;
+  }
+  
+  .candidateCard__information__information > span {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .candidateCard__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 150px;
+  }
+  
+  .candidateCard__information__title {
+    text-transform: capitalize;
+  }
+  
