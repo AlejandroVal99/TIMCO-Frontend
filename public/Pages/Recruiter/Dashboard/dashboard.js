@@ -20,10 +20,11 @@ const getUserData = () => {
   const token = localStorage.getItem("token");
   const userData = codedecJwt(token);
   let userName = userData.data.name;
+  let recruiterPic = userData.data.profileImage;
   let userDetail;
 
   if (API.IsRecruiterLogged) {
-    userDetail = userData.data.companyName;
+    userDetail = "Recruiter";
   } else {
     userDetail = userData.data.area.name;
   }
@@ -31,10 +32,17 @@ const getUserData = () => {
   const userNameSideBar = document.getElementById("userName");
   const userDetailSideBar = document.getElementById("userDetail");
   const helloUserNameTitle = document.getElementById("helloUserName");
+  const recruiterPicEle = document.getElementById("recruiter-picture");
 
   userNameSideBar.innerHTML = userName;
   helloUserNameTitle.innerHTML = userName;
   userDetailSideBar.innerHTML = userDetail;
+  if (
+    recruiterPic !== "" ||
+    (recruiterPic !== null) | (recruiterPic !== undefined)
+  ) {
+    recruiterPicEle.src = recruiterPic;
+  }
 };
 
 const loadNewProjectButton = () => {
@@ -114,7 +122,7 @@ const drawProjects = ({ projects = [] }) => {
       secondaryBtn: {
         visible: false,
       },
-      type: 'recruiter'
+      type: "recruiter",
     });
     if (!card) return;
     myProjectsContainer.appendChild(card);

@@ -6,7 +6,7 @@ import constants from "../../src/utils/constants.js";
 import { timeFromNow } from "../../src/utils/timeHelper.js";
 import currencyFormatter from "../../src/utils/currencyHelper.js";
 
-let candidates = [];
+// let candidates = [];
 
 const urlParams = new URLSearchParams(window.location.search);
 const IsRecruiterLogged = API.IsRecruiterLogged();
@@ -16,6 +16,8 @@ const owned = !!urlParams.get("owned");
 const usertype = urlParams.get("user");
 
 const projectData = await API.GetProjectByID(projectKey);
+
+const ProfilePicture = document.getElementById("profile-picture");
 
 const ProjectLogo = document.querySelector(".overview__header__logo");
 const ProjectState = document.querySelector(".overview__header__projectState");
@@ -67,7 +69,9 @@ const getUserData = () => {
   let userDetail;
 
   if (API.IsRecruiterLogged()) {
+    // debugger;
     userDetail = "Recruiter";
+    ProfilePicture.src = userData.data.profileImage;
   } else {
     userDetail = userData.data.area.name;
   }
@@ -77,7 +81,6 @@ const getUserData = () => {
   const userDetailSideBar = document.getElementById("userCurrentDetail");
 
   userNameSideBar.innerHTML = userName;
-
   userDetailSideBar.innerHTML = userDetail;
 };
 
