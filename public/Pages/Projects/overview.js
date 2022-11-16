@@ -364,7 +364,6 @@ const FillInformation = (projectData) => {
   if (ProjectDescription)
     ProjectDescription.textContent = projectData.description;
 
-  debugger;
   switch (projectData.state.stateId) {
     case constants.states.FINISHED_PROJECT_ID:
       setProjectBadgeState("Proyecto Finalizado", "#00d380", "finishState");

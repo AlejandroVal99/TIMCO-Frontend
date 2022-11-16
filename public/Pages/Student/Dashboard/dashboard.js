@@ -127,7 +127,6 @@ const drawProjectsByState = (state) => {
 };
 
 const drawProjects = ({ projects = [] }) => {
-  debugger;
   myProjectsContainer.innerHTML = null;
 
   projects.forEach((project) => {
