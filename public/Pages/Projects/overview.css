@@ -23,6 +23,13 @@ main {
   height: fit-content;
 }
 
+.overview__header__projectState{
+  padding: 8px 13px;
+  width: fit-content;
+  background: #E0FE68;
+  border-radius: 18px;
+}
+
 .overview {
   display: flex;
 
@@ -123,7 +130,6 @@ main {
 .overview__body__skill {
   padding: 8px 13px;
   width: fit-content;
-  background: #e0fe68;
   border-radius: 18px;
 }
 
