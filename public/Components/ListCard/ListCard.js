@@ -1,4 +1,6 @@
 import API from "../../src/TimcoApi.js";
+import { timeFromNow, formatMediumDate } from "../../src/utils/timeHelper.js";
+import currencyFormatter from "../../src/utils/currencyHelper.js";
 
 const ListCard = (() => {
   const CreateProjectCard = ({
@@ -16,9 +18,10 @@ const ListCard = (() => {
     primaryBtn = { label: "primary", onclick: () => {}, visible: true },
     secondaryBtn = { label: "secondary", onclick: () => {}, visible: true },
   }) => {
-    // debugger;
-    const card = document.createElement("article");
+    // const projectTimeData = timeFromNow(project.timelineDate);
+    // if(projectTimeData.when === 'past') return;
 
+    const card = document.createElement("article");
     card.classList.add("listCard");
 
     const projectLogo = document.createElement("img");
@@ -43,60 +46,61 @@ const ListCard = (() => {
     projectDetails.classList.add("listCard__information__information");
     informationSection.append(projectDetails);
 
-    const companySpan = document.createElement("span");
-    const companySpanIcon = document.createElement("img");
-    companySpanIcon.src = API.GetStaticRoute(
-      "Components/ListCard/resources/company.png"
-    );
-
-    companySpan.append(companySpanIcon);
-    projectDetails.append(companySpan);
-
-    const companyName = document.createElement("small");
+    
     if (type === "recruiter") {
-      companyName.textContent = project.company.name;
+      const companySpan = document.createElement("span");
+      const companySpanIcon = document.createElement("img");
+      companySpanIcon.src = API.GetStaticRoute(
+        "Components/ListCard/resources/company.png"
+      );
+  
+      companySpan.append(companySpanIcon);
+      projectDetails.append(companySpan);
+  
+      const companyName = document.createElement("small");
+      if (type === "recruiter") {
+        companyName.textContent = project.company.name;
+      }
+  
+      companySpan
+        .appendChild(document.createElement("p"))
+        .appendChild(companyName);
+        
+      const budgetSpan = document.createElement("span");
+      const budgetSpanIcon = document.createElement("img");
+      budgetSpanIcon.src = API.GetStaticRoute(
+        "Components/ListCard/resources/budget.png"
+      );
+      budgetSpan.append(budgetSpanIcon);
+      projectDetails.append(budgetSpan);
+
+      const budgetAmount = document.createElement("small");
+      budgetAmount.textContent = currencyFormatter(project.priceTotal);
+      budgetSpan
+        .appendChild(document.createElement("p"))
+        .appendChild(budgetAmount);
+
+      const deadlineSpan = document.createElement("span");
+      const deadlineSpanIcon = document.createElement("img");
+      deadlineSpanIcon.src = API.GetStaticRoute(
+        "Components/ListCard/resources/deadline.png"
+      );
+
+      deadlineSpan.append(deadlineSpanIcon);
+      projectDetails.append(deadlineSpan);
+
+      const deadlineTime = document.createElement("small");
+      deadlineTime.textContent = formatMediumDate(project.timelineDate);
+      // deadlineTime.textContent = `${projectTimeData.time} ${projectTimeData.unitOfTime}`;
+      deadlineSpan
+        .appendChild(document.createElement("p"))
+        .appendChild(deadlineTime);
     }
-
-    companySpan
-      .appendChild(document.createElement("p"))
-      .appendChild(companyName);
-
-    const budgetSpan = document.createElement("span");
-    const budgetSpanIcon = document.createElement("img");
-    budgetSpanIcon.src = API.GetStaticRoute(
-      "Components/ListCard/resources/budget.png"
-    );
-    budgetSpan.append(budgetSpanIcon);
-    projectDetails.append(budgetSpan);
-
-    const budgetAmount = document.createElement("small");
-    budgetAmount.textContent = project.priceTotal;
-    // budgetAmount.textContent = budget;
-    budgetSpan
-      .appendChild(document.createElement("p"))
-      .appendChild(budgetAmount);
-
-    const deadlineSpan = document.createElement("span");
-    const deadlineSpanIcon = document.createElement("img");
-    deadlineSpanIcon.src = API.GetStaticRoute(
-      "Components/ListCard/resources/deadline.png"
-    );
-
-    deadlineSpan.append(deadlineSpanIcon);
-    projectDetails.append(deadlineSpan);
-
-    const deadlineTime = document.createElement("small");
-    // deadlineTime.textContent = deadline + ' Semanas';
-    deadlineTime.textContent = project.timelineDate;
-    deadlineSpan
-      .appendChild(document.createElement("p"))
-      .appendChild(deadlineTime);
 
     const cardControls = document.createElement("section");
     cardControls.classList.add("listCard__controls");
     card.append(cardControls);
 
-    //debugger;
     if (primaryBtn.visible) {
       const deliverBtn = document.createElement("button");
 

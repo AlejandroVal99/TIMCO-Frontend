@@ -41,8 +41,28 @@ const API = (() => {
   /////////Student methods
   /////////////////////////////////////////////
 
+  const GetVacancyAvailableByArea = async () => {
+    let token = localStorage.getItem("token");
+    if (!token) {
+      localStorage.removeItem("token");
+      GoToStudentLogin();
+    }
+
+    let { area } = parseJwt(token).data;
+    const request = await fetch(
+      `${postURL}/project/vancancy-available/${area.areaId}`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const response = await request.json();
+    if (response.error) return response.error;
+    return response.data;
+  };
+
   const LoginStudent = async (student) => {
-    console.log(student)
     const request = await fetch(`${postURL}/auth/student`, {
       method: "POST",
       mode: "cors",
@@ -56,7 +76,7 @@ const API = (() => {
     }
     const currentUserId = parseJwt(response.access).data.studentId;
     const user = parseJwt(response.access).data;
-    
+
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", response.access);
     localStorage.setItem(loggedStudentKey, currentUserId);
@@ -74,7 +94,6 @@ const API = (() => {
 
     if (response.error) return response.error;
     let currentUserId = parseJwt(response.accessToken).data;
-    console.log(currentUserId);
     localStorage.setItem(loggedStudentKey, currentUserId);
     localStorage.setItem("token", response.accessToken);
     GoToStudentDetails();
@@ -91,8 +110,8 @@ const API = (() => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-      },
-    });
+        },
+      });
       switch (request.status) {
         case 200:
           SignOutStudent();
@@ -134,7 +153,7 @@ const API = (() => {
     });
     const response = await request.json();
     if (response.error) return response.error;
-     let currentUserId = parseJwt(response.accessToken).data;
+    let currentUserId = parseJwt(response.accessToken).data;
     localStorage.setItem(loggedRecruiterKey, currentUserId);
     localStorage.setItem("token", response.access);
     GoToRecruiterDetails();
@@ -405,7 +424,7 @@ const API = (() => {
       });
       switch (request.status) {
         case 200:
-          console.log(request.json())
+          console.log(request.json());
           break;
         case 404:
           alert("La petición no dió resultado");
@@ -415,7 +434,6 @@ const API = (() => {
       alert("Hubo un problema, intentalo de nuevo en unos minutos");
     }
   }; //Closes UploadStudentDetails method
-
 
   const createProject = async (project, token) => {
     token = localStorage.getItem("token");
@@ -507,6 +525,7 @@ const API = (() => {
     SubmitProject,
     createProject,
     JoinProjectRequest,
+    GetVacancyAvailableByArea,
     GetActiveProjectsByStudent,
     GetActiveProjects,
     GetCandidatesByProjectId,

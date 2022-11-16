@@ -1,4 +1,5 @@
 import ListCard from "../../../Components/ListCard/ListCard.js";
+import ZeroItems from "../../../Components/ZeroItems/ZeroItems.js";
 import ProjectCard from "../../../Components/ProjectCard/ProjectCard.js";
 import API from "./../../../src/TimcoApi.js";
 import parseJwt from "./../../../src/utils/parseJWT.js";
@@ -40,12 +41,11 @@ const getUserData = () => {
 
 const LoadVacancies = async () => {
   let candidateProjectsIds = [];
-  let token = localStorage.getItem("token");
-  let userData = parseJwt(token).data;
 
   const candidatesByStudent = await API.GetCandidatesByStudentId(
     userData.studentId
   );
+
   if (candidatesByStudent.length > 0) {
     candidateProjects = candidatesByStudent;
     candidateProjectsIds = candidatesByStudent.map(
@@ -53,20 +53,15 @@ const LoadVacancies = async () => {
     );
   }
 
-  const projectsData = await API.GetActiveProjects({
-    entityId: userData.studentId,
-  });
-  let projectsFilter = projectsData.data.filter((project) => {
-    //debugger;
+  const projectsData = await API.GetVacancyAvailableByArea();
+  let projectsFilter = projectsData.filter((project) => {
     if (!candidateProjectsIds.includes(project.projectId)) {
-      return project.state.stateId === constants.states.UNASSIGNED_PROJECT_ID;
+      return project.stateId === constants.states.UNASSIGNED_PROJECT_ID;
     }
   });
-  console.log(projectsFilter);
-  
+
   if (!projectsFilter) return;
   projectsFilter.forEach((project) => {
-    console.log("Entro");
     const card = ProjectCard.Create({
       project,
       primaryBtn: {
@@ -89,8 +84,14 @@ const LoadMyProjects = async () => {
 
   if (userData !== null) {
     projects = await API.GetActiveProjects({ entityId: userData.studentId });
-    if (projects.data.length === 0) return;
     projects = projects.data;
+    if (projects.length === 0) {
+      const zeroDataEle = ZeroItems.CreateZeroItemsCard({
+        state: constants.states.ACTIVE_PROJECT_ID,
+      });
+      myProjectsContainer.appendChild(zeroDataEle);
+      return;
+    }
     drawProjectsByState(constants.states.ACTIVE_PROJECT_ID);
   }
 }; //Closes LoadVacancies method
@@ -108,6 +109,13 @@ const drawProjectsByState = (state) => {
     projectsFilter = projects.filter(
       (project) => project.state.stateId === state
     );
+  }
+
+  if (projectsFilter.length === 0) {
+    myProjectsContainer.innerHTML = null;
+    const zeroDataEle = ZeroItems.CreateZeroItemsCard({ state });
+    myProjectsContainer.appendChild(zeroDataEle);
+    return;
   }
 
   drawProjects({ projects: projectsFilter });
@@ -132,6 +140,7 @@ const drawProjects = ({ projects = [] }) => {
             visible: "true",
             onclick: () => OnProjectClicked({ id: project.projectId }),
           },
+          type: 'recruiter'
         });
 
         break;
@@ -146,6 +155,7 @@ const drawProjects = ({ projects = [] }) => {
             visible: "true",
             onclick: () => OnProjectClicked({ id: project.projectId }),
           },
+          type: 'recruiter'
         });
         break;
       case constants.states.WAITING_PROJECT_ID:
@@ -159,6 +169,7 @@ const drawProjects = ({ projects = [] }) => {
             visible: "true",
             onclick: () => OnProjectClicked({ id: project.projectId }),
           },
+          type: 'recruiter'
         });
         break;
     }
@@ -181,12 +192,21 @@ const SignOut = () => {
 };
 
 activeTabEle.addEventListener("click", function () {
+  activeTabEle.classList.add("selected");
+  finishedTabEle.classList.remove("selected");
+  waitingTabEle.classList.remove("selected");
   drawProjectsByState(constants.states.ACTIVE_PROJECT_ID);
 });
 finishedTabEle.addEventListener("click", function () {
+  finishedTabEle.classList.add("selected");
+  activeTabEle.classList.remove("selected");
+  waitingTabEle.classList.remove("selected");
   drawProjectsByState(constants.states.FINISHED_PROJECT_ID);
 });
 waitingTabEle.addEventListener("click", function () {
+  waitingTabEle.classList.add("selected");
+  activeTabEle.classList.remove("selected");
+  finishedTabEle.classList.remove("selected");
   drawProjectsByState(constants.states.WAITING_PROJECT_ID);
 });
 
