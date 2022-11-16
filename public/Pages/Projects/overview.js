@@ -6,7 +6,7 @@ import constants from "../../src/utils/constants.js";
 import { timeFromNow } from "../../src/utils/timeHelper.js";
 import currencyFormatter from "../../src/utils/currencyHelper.js";
 
-// let candidates = [];
+let candidates = [];
 
 const urlParams = new URLSearchParams(window.location.search);
 const IsRecruiterLogged = API.IsRecruiterLogged();
@@ -69,13 +69,11 @@ const getUserData = () => {
   let userDetail;
 
   if (API.IsRecruiterLogged()) {
-    // debugger;
     userDetail = "Recruiter";
     ProfilePicture.src = userData.data.profileImage;
   } else {
     userDetail = userData.data.area.name;
   }
-  //projectKey.value = userName;
 
   const userNameSideBar = document.getElementById("userCurrentName");
   const userDetailSideBar = document.getElementById("userCurrentDetail");
@@ -199,7 +197,6 @@ if (ApplyModal) {
     Request.stateId = constants.states.WAITING_PROJECT_ID;
 
     const candidate = await API.JoinProjectRequest(Request);
-    debugger;
     if (candidate) {
       // alert("Petición enviada exitosamente");
       window.location.reload();
@@ -221,25 +218,25 @@ const RenderProjectData = async (key) => {
 };
 
 const loadCandidates = async (projectKey) => {
-  const candidatesData = await API.GetCandidatesByProjectId(projectKey);
-  candidates = candidatesData;
-  drawCandidateCard(candidatesData, projectKey);
+  candidates = await API.GetCandidatesByProjectId(projectKey);
+  drawCandidateCard(candidates);
 };
 
-const drawCandidateCard = (candidates, projectId) => {
-  // let candidateId,
-  let companyId,
-    studentId = 0;
+const drawCandidateCard = (candidates) => {
+  let studentId = 0;
 
   if (!candidates || candidates.length === 0) {
     candidatesContainer.appendChild(
-      ZeroItems.CreateZeroItemsCard({ label: "candidatos", showState: false })
+      ZeroItems.CreateZeroItemsCard({
+        label: "candidatos",
+        labelDetail: `para este proyecto.`,
+        showState: false,
+      })
     );
     return;
   }
 
   candidates.forEach((candidate) => {
-    // candidateId = candidate.candidateId;
     companyId = candidate.companyId;
     studentId = candidate.student.studentId;
 
@@ -262,8 +259,6 @@ const drawCandidateCard = (candidates, projectId) => {
         onclick: (candidateId) => {
           onRejectCandidate(candidateId);
         },
-        // onclick: () =>
-        //   onRejectCandidate({ candidateId, companyId, projectId, studentId }),
         visible: true,
       },
     });
@@ -303,9 +298,9 @@ const onRejectCandidate = async (candidateId) => {
 
 const setProjectBadgeState = (label, color, stateClass) => {
   ProjectState.textContent = label;
-  ProjectState.style.backgroundColor  = color;
+  ProjectState.style.backgroundColor = color;
   ProjectState.classList.add(stateClass);
-}
+};
 
 const FillInformation = (projectData) => {
   if (!projectData) return;
@@ -319,23 +314,25 @@ const FillInformation = (projectData) => {
 
   switch (projectData.state.stateId) {
     case constants.states.FINISHED_PROJECT_ID:
-      setProjectBadgeState('Proyecto Finalizado', '#00d380', 'finishState');
+      setProjectBadgeState("Proyecto Finalizado", "#00d380", "finishState");
       break;
     case constants.states.ACTIVE_PROJECT_ID:
-      setProjectBadgeState('Proyecto en progreso', '#8ac2dd', 'inProgressState');
+      setProjectBadgeState(
+        "Proyecto en progreso",
+        "#8ac2dd",
+        "inProgressState"
+      );
       break;
     case constants.states.WAITING_PROJECT_ID:
-      setProjectBadgeState('Proyecto a la espera', '#e0fe68', 'waitingState');
+      setProjectBadgeState("Proyecto a la espera", "#e0fe68", "waitingState");
       break;
     case constants.states.REJECT_PROJECT_ID:
-      setProjectBadgeState('Rechazado', '#f7863c', 'rejectState');
+      setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
       break;
     default:
-      setProjectBadgeState('Proyecto a la espera', '#e0fe68', 'waitingState');
+      setProjectBadgeState("Proyecto a la espera", "#e0fe68", "waitingState");
       break;
   }
-
-  
 
   if (ProjectBudget)
     ProjectBudget.textContent = currencyFormatter(projectData.priceTotal);
@@ -364,17 +361,13 @@ const FillInformation = (projectData) => {
   if (ProjectBrief) ProjectBrief.textContent = projectData.description;
 
   if (ProjectRequirements) {
-    if (!projectData.deliverables) {
-      ProjectRequirements.appendChild(
-        ZeroItems.CreateZeroItemsCard({
-          label: "entregables",
-          showState: false,
-        })
-      );
+    ProjectSkills.innerHTML = null;
+
+    if (projectData.deliverables === null || projectData.deliverables === undefined) {
+      ProjectRequirements.textContent = 'El reclutador aún no adjuntado entregables.';
     } else {
       ProjectRequirements.textContent = projectData.deliverables;
     }
-    ProjectSkills.innerHTML = null;
 
     const { skills } = projectData.service;
 
@@ -388,7 +381,8 @@ const FillInformation = (projectData) => {
     });
   }
 
-  if (candidatesContainer) {
+  if (candidatesContainer && usertype === "recruiter") {
+    loadCandidates(projectKey);
   }
 
   if (WebsiteButton) WebsiteButton.href = projectData.species.url;
@@ -402,4 +396,4 @@ const FillInformation = (projectData) => {
 
 RenderProjectData(projectKey);
 getUserData();
-loadCandidates(projectKey);
+// loadCandidates(projectKey);
