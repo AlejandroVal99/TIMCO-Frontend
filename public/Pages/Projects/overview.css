@@ -28,6 +28,7 @@ main {
   width: fit-content;
   background: #E0FE68;
   border-radius: 18px;
+  /* border-radius: 18px; */
 }
 
 .overview {
@@ -131,6 +132,7 @@ main {
   padding: 8px 13px;
   width: fit-content;
   border-radius: 18px;
+  background-color: #e0fe68;
 }
 
 .overview__attached {

@@ -18,6 +18,7 @@ const usertype = urlParams.get("user");
 const projectData = await API.GetProjectByID(projectKey);
 
 const ProjectLogo = document.querySelector(".overview__header__logo");
+const ProjectState = document.querySelector(".overview__header__projectState");
 const ProjectName = document.querySelector(".overview__header__projectName");
 const ProjectType = document.querySelector(".overview__header__projectType");
 const ProjectDescription = document.querySelector(
@@ -297,6 +298,12 @@ const onRejectCandidate = async (candidateId) => {
   location.reload();
 };
 
+const setProjectBadgeState = (label, color, stateClass) => {
+  ProjectState.textContent = label;
+  ProjectState.style.backgroundColor  = color;
+  ProjectState.classList.add(stateClass);
+}
+
 const FillInformation = (projectData) => {
   if (!projectData) return;
 
@@ -306,6 +313,26 @@ const FillInformation = (projectData) => {
   if (ProjectType) ProjectType.textContent = projectData.service.name;
   if (ProjectDescription)
     ProjectDescription.textContent = projectData.description;
+
+  switch (projectData.state.stateId) {
+    case constants.states.FINISHED_PROJECT_ID:
+      setProjectBadgeState('Proyecto Finalizado', '#00d380', 'finishState');
+      break;
+    case constants.states.ACTIVE_PROJECT_ID:
+      setProjectBadgeState('Proyecto en progreso', '#8ac2dd', 'inProgressState');
+      break;
+    case constants.states.WAITING_PROJECT_ID:
+      setProjectBadgeState('Proyecto a la espera', '#e0fe68', 'waitingState');
+      break;
+    case constants.states.REJECT_PROJECT_ID:
+      setProjectBadgeState('Rechazado', '#f7863c', 'rejectState');
+      break;
+    default:
+      setProjectBadgeState('Proyecto a la espera', '#e0fe68', 'waitingState');
+      break;
+  }
+
+  
 
   if (ProjectBudget)
     ProjectBudget.textContent = currencyFormatter(projectData.priceTotal);
