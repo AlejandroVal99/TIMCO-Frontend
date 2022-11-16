@@ -67,7 +67,6 @@ btnReturnToDashBoard.addEventListener("click", () => {
 const getUserData = () => {
   const token = localStorage.getItem("token");
   userData = parseJwt(token).data;
-  console.log('1. USER DATA:', userData);
   let userName = userData.name;
   let userDetail;
 
@@ -93,33 +92,33 @@ const candidatesContainer = document.querySelector(
   "#overview__candidates__container"
 );
 
-if (usertype != "recruiter") {
-  if (candidatesTitle) candidatesTitle.remove();
-  if (candidatesContainer) candidatesContainer.remove();
-  if (
-    projectData.state.stateId === constants.states.FINISHED_PROJECT_ID ||
-    projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID
-  ) {
-    if (DeliverButton) {
-      // DeliverButton.disabled = true;
-      DeliverButton.remove();
-    }
-  }
-} else {
-  if (DeliverButton) DeliverButton.remove();
-  if (ApplyButton) ApplyButton.remove();
+// if (usertype != "recruiter") {
+//   if (candidatesTitle) candidatesTitle.remove();
+//   if (candidatesContainer) candidatesContainer.remove();
+//   if (
+//     projectData.state.stateId === constants.states.FINISHED_PROJECT_ID ||
+//     projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID
+//   ) {
+//     if (DeliverButton) {
+//       // DeliverButton.disabled = true;
+//       DeliverButton.remove();
+//     }
+//   }
+// } else {
+//   if (DeliverButton) DeliverButton.remove();
+//   if (ApplyButton) ApplyButton.remove();
 
-  switch (projectData.state.stateId) {
-    case constants.states.UNASSIGNED_PROJECT_ID:
-      if (ProjectBriefContainer) ProjectBriefContainer.remove();
-      if (SkillContainer) SkillContainer.remove();
-      break;
-    default:
-      if (candidatesTitle) candidatesTitle.remove();
-      if (candidatesContainer) candidatesContainer.remove();
-      break;
-  }
-}
+//   switch (projectData.state.stateId) {
+//     case constants.states.UNASSIGNED_PROJECT_ID:
+//       if (ProjectBriefContainer) ProjectBriefContainer.remove();
+//       if (SkillContainer) SkillContainer.remove();
+//       break;
+//     default:
+//       if (candidatesTitle) candidatesTitle.remove();
+//       if (candidatesContainer) candidatesContainer.remove();
+//       break;
+//   }
+// }
 
 if (DeliverButton) {
   if (!owned) {
@@ -356,7 +355,6 @@ const setProjectBadgeState = (label, color, stateClass) => {
 };
 
 const FillInformation = (projectData) => {
-  debugger;
   if (!projectData) return;
 
   ProjectRequirements.innerHTML = null;
@@ -366,6 +364,7 @@ const FillInformation = (projectData) => {
   if (ProjectDescription)
     ProjectDescription.textContent = projectData.description;
 
+  debugger;
   switch (projectData.state.stateId) {
     case constants.states.FINISHED_PROJECT_ID:
       setProjectBadgeState("Proyecto Finalizado", "#00d380", "finishState");
@@ -388,8 +387,10 @@ const FillInformation = (projectData) => {
       break;
   }
 
-  console.log('USER DATA:', userData)
-  if(projectData.studentId !== userData.studentId) {
+  if (
+    projectData.studentId !== userData.studentId &&
+    projectData.state.stateId !== constants.states.UNASSIGNED_PROJECT_ID
+  ) {
     setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
   }
 
@@ -418,6 +419,35 @@ const FillInformation = (projectData) => {
   }
 
   if (ProjectBrief) ProjectBrief.textContent = projectData.description;
+
+  if (usertype != "recruiter") {
+    if (candidatesTitle) candidatesTitle.remove();
+    if (candidatesContainer) candidatesContainer.remove();
+    if (
+      projectData.state.stateId === constants.states.FINISHED_PROJECT_ID ||
+      projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID ||
+      projectData.studentId !== userData.studentId
+    ) {
+      if (DeliverButton) {
+        // DeliverButton.disabled = true;
+        DeliverButton.remove();
+      }
+    }
+  } else {
+    if (DeliverButton) DeliverButton.remove();
+    if (ApplyButton) ApplyButton.remove();
+
+    switch (projectData.state.stateId) {
+      case constants.states.UNASSIGNED_PROJECT_ID:
+        if (ProjectBriefContainer) ProjectBriefContainer.remove();
+        if (SkillContainer) SkillContainer.remove();
+        break;
+      default:
+        if (candidatesTitle) candidatesTitle.remove();
+        if (candidatesContainer) candidatesContainer.remove();
+        break;
+    }
+  }
 
   if (ProjectRequirements) {
     ProjectSkills.innerHTML = null;
