@@ -26,16 +26,15 @@ const waitingTabEle = document.getElementById("waiting-tab");
 
 const getUserData = () => {
   if (userData !== null) {
-    let userName = userData.name;
-    let userDetail = userData.area.name;
-
     const userNameSideBar = document.getElementById("userName");
+    // const userPicSideBar = document.getElementById("profile-picture");
     const userDetailSideBar = document.getElementById("userDetail");
     const helloUserNameTitle = document.getElementById("helloUserName");
 
-    userNameSideBar.innerHTML = userName;
-    helloUserNameTitle.innerHTML = userName;
-    userDetailSideBar.innerHTML = userDetail;
+    userNameSideBar.innerHTML = userData.name;
+    // userPicSideBar.src = userData.profileImage;
+    helloUserNameTitle.innerHTML = userData.name;
+    userDetailSideBar.innerHTML = userData.area.name;
   }
 };
 

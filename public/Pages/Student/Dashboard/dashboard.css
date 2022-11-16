@@ -109,3 +109,19 @@ main {
   background: #ffffff;
   border-radius: 14px;
 }
+
+#profile-picture {
+  border-radius: 50%;
+  width: 100%;
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  #profile-picture {
+    width: 100%;
+    max-width: 80px;
+    height: 80px;
+  }
+}
