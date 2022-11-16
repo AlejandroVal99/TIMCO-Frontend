@@ -27,13 +27,16 @@
           alt="logo"
           srcset=""
         />
-        <img
-          src="./../../Components/Sidebar/resources/profilePicture.png"
-          alt="profilePicture"
-          srcset=""
-        />
-        <p id="userCurrentName">Alejando Valverde</p>
-        <p id="userCurrentDetail">Diseñador UX/UI</p>
+        <div class="sidebar__header__user">
+          <img
+            src="./../../Components/Sidebar/resources/profilePicture.png"
+            alt="profilePicture"
+            srcset=""
+            id="profile-picture"
+          />
+          <h6 id="userCurrentName">Alejando Valverde</h6>
+          <p id="userCurrentDetail">Diseñador UX/UI</p>
+        </div>
       </div>
       <nav>
         <a href="./../Student/Dashboard/dashboard.html"
@@ -147,9 +150,9 @@
           <div id="skills__required__container">
             <h5>Habilidades requeridas</h5>
             <div class="overview__body__skills">
-              <h5>Entregables</h5>
+              <!-- <h5>Entregables</h5> -->
             </div>
-            <div class="overview__divider"></div>
+            <!-- <div class="overview__divider"></div> -->
           </div>
           <h5 id="overview__candidates__title">Candidatos</h5>
           <div id="overview__candidates__container"></div>

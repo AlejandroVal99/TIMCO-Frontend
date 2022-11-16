@@ -5,6 +5,7 @@ const ZeroItems = (() => {
     label = "proyectos",
     state = 1,
     showState = true,
+    labelDetail = ''
   }) => {
     let card = document.querySelector(".zeroItemsCard");
     if (card === null) {
@@ -14,7 +15,7 @@ const ZeroItems = (() => {
 
     showState
       ? (card.textContent = `No hay ${label} ${enums.pluralStates[state]}`)
-      : (card.textContent = `Aún no hay ${label}`);
+      : (card.textContent = `Aún no hay ${label} ${labelDetail}`);
 
     return card;
   };
