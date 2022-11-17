@@ -8,6 +8,7 @@ import { timeFromNow } from "../../src/utils/timeHelper.js";
 import currencyFormatter from "../../src/utils/currencyHelper.js";
 
 let candidates = [];
+let userData = {};
 
 const urlParams = new URLSearchParams(window.location.search);
 const IsRecruiterLogged = API.IsRecruiterLogged();
@@ -67,15 +68,15 @@ btnReturnToDashBoard.addEventListener("click", () => {
 
 const getUserData = () => {
   const token = localStorage.getItem("token");
-  const userData = parseJwt(token);
-  let userName = userData.data.name;
+  userData = parseJwt(token).data;
+  let userName = userData.name;
   let userDetail;
 
   if (API.IsRecruiterLogged()) {
     userDetail = "Recruiter";
-    ProfilePicture.src = userData.data.profileImage;
+    ProfilePicture.src = userData.profileImage;
   } else {
-    userDetail = userData.data.area.name;
+    userDetail = userData.area.name;
   }
 
   const userNameSideBar = document.getElementById("userCurrentName");
@@ -83,6 +84,8 @@ const getUserData = () => {
 
   userNameSideBar.innerHTML = userName;
   userDetailSideBar.innerHTML = userDetail;
+
+  RenderProjectData(projectKey);
 };
 
 const candidatesTitle = document.querySelector("#overview__candidates__title");
@@ -198,11 +201,11 @@ if (ApplyModal) {
   ApplyModal.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
-    const userData = parseJwt(token);
+    // const token = localStorage.getItem("token");
+    // const userData = parseJwt(token);
     const Request = {};
 
-    Request.studentId = userData.data.studentId;
+    Request.studentId = userData.studentId;
     Request.companyId = projectData.companyId;
     Request.projectId = projectData.projectId;
     Request.stateId = constants.states.WAITING_PROJECT_ID;
@@ -344,7 +347,7 @@ const drawCandidateCard = (candidates) => {
     return;
   }
 
-  // New candidate Card component
+    // New candidate Card component
   candidates.forEach((candidate) => {
     debugger;
     companyId = candidate.companyId;
@@ -434,6 +437,17 @@ const onAcceptCandidate = async ({ candidateId, studentId }) => {
     stateId: constants.states.ACTIVE_PROJECT_ID,
   });
 
+  // Rechazar a los otros candidatos
+  const othersCandidates = candidates.filter(
+    (candidate) => candidate.candidateId !== parseInt(candidateId)
+  );
+  othersCandidates.forEach((rejectCandidate) => {
+    API.PutCandidateProject({
+      candidateId: rejectCandidate.candidateId,
+      stateId: constants.states.REJECT_PROJECT_ID,
+    });
+  });
+
   location.reload();
 };
 
@@ -487,6 +501,13 @@ const FillInformation = (projectData) => {
       break;
   }
 
+  if (
+    projectData.studentId !== userData.studentId &&
+    projectData.state.stateId !== constants.states.UNASSIGNED_PROJECT_ID
+  ) {
+    setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
+  }
+
   if (ProjectBudget)
     ProjectBudget.textContent = currencyFormatter(projectData.priceTotal);
   if (ProjectDeadline) {
@@ -512,6 +533,35 @@ const FillInformation = (projectData) => {
   }
 
   if (ProjectBrief) ProjectBrief.textContent = projectData.description;
+
+  if (usertype != "recruiter") {
+    if (candidatesTitle) candidatesTitle.remove();
+    if (candidatesContainer) candidatesContainer.remove();
+    if (
+      projectData.state.stateId === constants.states.FINISHED_PROJECT_ID ||
+      projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID ||
+      projectData.studentId !== userData.studentId
+    ) {
+      if (DeliverButton) {
+        // DeliverButton.disabled = true;
+        DeliverButton.remove();
+      }
+    }
+  } else {
+    if (DeliverButton) DeliverButton.remove();
+    if (ApplyButton) ApplyButton.remove();
+
+    switch (projectData.state.stateId) {
+      case constants.states.UNASSIGNED_PROJECT_ID:
+        if (ProjectBriefContainer) ProjectBriefContainer.remove();
+        if (SkillContainer) SkillContainer.remove();
+        break;
+      default:
+        if (candidatesTitle) candidatesTitle.remove();
+        if (candidatesContainer) candidatesContainer.remove();
+        break;
+    }
+  }
 
   if (ProjectRequirements) {
     ProjectSkills.innerHTML = null;
@@ -547,7 +597,7 @@ const FillInformation = (projectData) => {
   //   LinkedInButton.href = projectData.location_area_encounters;
 };
 
-RenderProjectData(projectKey);
+// RenderProjectData(projectKey);
 getUserData();
 deliverOptions();
 // loadCandidates(projectKey);

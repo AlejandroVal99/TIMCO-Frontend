@@ -141,6 +141,7 @@ const API = (() => {
   const SignOutStudent = () => {
     localStorage.removeItem(loggedStudentKey);
     localStorage.removeItem("token");
+    localStorage.removeItem('user');
     GoToStudentLogin();
     return;
   }; //Closes SignOutStudent method
