@@ -183,6 +183,8 @@
             Entregar
           </button>
           <button id="ApplyBtn" class="cta_button --accented">Aplicar</button>
+          <a id="showDeliver" target="_blank" class="cta_button">Revisar Entrega</a>
+          <button id="AcceptDeliverBtn" class="cta_button --accented">Aceptar Entrega</button>
         </aside>
       </section>
     </main>
@@ -212,7 +214,7 @@
               required="true"
               type="text"
               id="title"
-              name="title"
+              name="titleDelivery"
               placeholder="Escribe un nombre para esta entrega"
             />
           </div>
@@ -226,7 +228,7 @@
               required="true"
               rows="4"
               cols="50"
-              name="description"
+              name="descriptionDelivery"
               id="description"
               placeholder="Ej: Cuentale al cliente qué se va encontrar en estos archivos o algún detalle que necesite saber"
             ></textarea>
@@ -241,7 +243,7 @@
               required="true"
               type="text"
               id="attachment"
-              name="attachment"
+              name="urlDelivery"
               placeholder="Pega la URL de los archivos o carpeta donde hayas subido los entregables"
             />
           </div>
@@ -314,7 +316,52 @@
           </p>
           <footer>
             <button type="button" class="cta_button cancelBtn">Cancelar</button>
-            <button type="submit" class="cta_button --accented">Aplicar</button>
+            <button type="submit" class="cta_button --accented">Aplicar al proyecto</button>
+          </footer>
+        </form>
+      </div>
+    </div>
+
+    <div id="AcceptDeliverModal" class="modal hidden">
+      <div class="modalPanel">
+        <div class="modalPanel__header">
+          <div class="modalPanel__header__info">
+            <h5>Aceptar Entregable</h5>
+          </div>
+          <button class="closeModal__btn">
+            <img src="./resources/close.png" alt="close" />
+          </button>
+        </div>
+        <form id="AcceptDeliverModalForm" name="AcceptDeliverModalForm">
+          <div class="textInput">
+            <p>
+              <label for="message"><small>¿Deseas dejar algún comentario?</small></label>
+            </p>
+            <textarea
+              required="true"
+              rows="4"
+              cols="50"
+              name="comments"
+              id="message"
+              placeholder="Tiene algún comentario sobre tu entregable. Agradecemos que nos cuentes cualquie inquietud que tengas"
+            ></textarea>
+          </div>
+          <p>
+            <input
+              required="true"
+              type="checkbox"
+              name="conditions"
+              id="conditions"
+            />
+            <small
+              ><label for="conditions"
+                >Aceptas esta entrega según los terminos y condiciones establecidos</label
+              ></small
+            >
+          </p>
+          <footer>
+            <button type="button" class="cta_button cancelBtn">Cancelar</button>
+            <button type="submit" class="cta_button --accented">Aceptar Entrega</button>
           </footer>
         </form>
       </div>

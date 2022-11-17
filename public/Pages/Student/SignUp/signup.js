@@ -9,9 +9,10 @@ document.querySelector(".login__form").addEventListener("submit", async (e) => {
     password: e.target[2].value,
     phone: null,
     career: "Desing",
+  
     currentSemester: 1,
     aboutMe: "This is America",
-    profileImage: null,
+    profileImage: "https://firebasestorage.googleapis.com/v0/b/timco-api.appspot.com/o/student.png?alt=media&token=6b34dc15-b130-475f-a9e9-cd77def8fec9",
     universityId: 1,
     areaId: 1,
   };

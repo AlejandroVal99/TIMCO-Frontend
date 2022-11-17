@@ -12,11 +12,13 @@ const ListCard = (() => {
       deadline: 3,
       priceTotal: 0,
       timelineDate: 0,
+      
     },
     type = "student",
     projectTheme = "#F7863C",
     primaryBtn = { label: "primary", onclick: () => {}, visible: true },
     secondaryBtn = { label: "secondary", onclick: () => {}, visible: true },
+    inReview = false
   }) => {
     // const projectTimeData = timeFromNow(project.timelineDate);
     // if(projectTimeData.when === 'past') return;
@@ -41,11 +43,21 @@ const ListCard = (() => {
     projectTitle.classList.add("listCard__information__title");
     projectTitle.textContent = project.name;
     informationSection.appendChild(projectTitle);
+    //console.log(project);
+    if(inReview){
+    const projectNotification = document.createElement("p");
+    projectNotification.classList.add("listCard__information__notification");
+    projectNotification.textContent = "Entrega a la espera de revisión";
+    informationSection.appendChild(projectNotification);
+    }
 
     const projectDetails = document.createElement("div");
     projectDetails.classList.add("listCard__information__information");
     informationSection.append(projectDetails);
 
+    if(project.inReview){
+
+    }
     
     if (type === "recruiter") {
       const companySpan = document.createElement("span");

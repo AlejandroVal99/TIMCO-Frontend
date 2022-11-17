@@ -10,7 +10,7 @@ document.querySelector('.login__form').addEventListener('submit', async e => {
         password: e.target[2].value,
         // phone: '000',
         // aboutMe: 'default description',
-        // profileImage: '///'
+        profileImage: 'https://firebasestorage.googleapis.com/v0/b/timco-api.appspot.com/o/company.png?alt=media&token=da567be6-df01-4159-9117-d00dc7880326'
     }
     const res = await AttemptRegistration(newRecruiter);
     if(res.status === 'error') {

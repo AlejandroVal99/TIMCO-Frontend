@@ -75,7 +75,14 @@ const ProjectCard = (() => {
     deadlineSection.append(projectDeadline);
 
     const ctaButton = document.createElement("button");
+    ctaButton.value = project.projectId;
     ctaButton.onclick = primaryBtn.onclick;
+    // ctaButton.addEventListener('click', function (e) {
+    //   let value = e.target.value;
+    //   return primaryBtn.onclick({
+    //     projectId: value
+    //   });
+    // })
     ctaButton.type = "button";
     ctaButton.classList.add("cta_button");
     ctaButton.textContent = primaryBtn.label;

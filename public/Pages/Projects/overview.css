@@ -149,6 +149,11 @@ main {
   border-radius: 18px;
   background-color: #e0fe68;
 }
+#showDeliver:visited, #showDeliver:active {
+ 
+  text-decoration:none;
+  
+}
 
 .overview__attached {
   display: flex;

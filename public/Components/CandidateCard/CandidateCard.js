@@ -12,7 +12,10 @@ const CandidateCard = (() => {
       studentId: 3,
       name: 0,
     },
-
+    studentData = {
+      university: "Universidad Icesi",
+      area: "Diseño"
+    },
     projectTheme = "#F7863C",
     primaryBtn = { label: "primary", onclick: () => {}, visible: true },
     secondaryBtn = { label: "secondary", onclick: () => {}, visible: true },
@@ -66,7 +69,7 @@ const CandidateCard = (() => {
     universitySpan.append(universitySpanIcon);
     
     const universityName = document.createElement("small");
-    universityName.textContent = candidate.name;
+    universityName.textContent = studentData.university;
     
     universitySpan
     .appendChild(document.createElement("p"))
@@ -84,7 +87,7 @@ const CandidateCard = (() => {
     );
     areaSpan.append(areaSpanIcon);
     const areaName = document.createElement("small");
-    areaName.textContent = candidate.name;
+    areaName.textContent = studentData.area;
 
     areaSpan
       .appendChild(document.createElement("p"))

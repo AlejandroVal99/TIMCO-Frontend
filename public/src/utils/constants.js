@@ -6,5 +6,6 @@ export default {
     WAITING_PROJECT_ID: 4,
     APPROVE_PROJECT_ID: 5,
     REJECT_PROJECT_ID: 6,
+    INREVIEW_PROJECT_ID: 7,
   },
 };

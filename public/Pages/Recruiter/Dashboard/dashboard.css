@@ -108,9 +108,10 @@ main {
   width: 100%;
   gap: 1px;
   display: flex;
-  flex-direction: column;
+  
   background-color: #e0e0e0;
 }
+
 
 .dashboard_me__stats {
   height: fit-content;
@@ -129,7 +130,15 @@ main {
   background: #ffffff;
   border-radius: 14px;
 }
-
+.dashboard_new__projects__nav{
+  display: flex;
+  flex-direction: row;
+  border: 2px solid red;
+}
 .dashboard_new__projects__nav > a {
   width: fit-content;
+}
+#activeProjectsContainer{
+  flex-direction: row;
+  gap:24px;
 }

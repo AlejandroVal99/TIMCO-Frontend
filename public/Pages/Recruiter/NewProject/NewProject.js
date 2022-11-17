@@ -1,5 +1,6 @@
 import API from "../../../src/TimcoApi.js";
 import parseJwt from "../../../src/utils/parseJWT.js";
+import currencyFormatter from "../../../src/utils/currencyHelper.js";
 const companyData = localStorage.getItem("loggedRecruiter");
 
 console.log("Go")
@@ -128,6 +129,7 @@ const NextSection = () => {
 
 window.PreviousSection = () => {
   form[currentScreen][currentSection].classList.add("hidden");
+  
   currentSection--;
 
   let nextSection = form[currentScreen][currentSection];
@@ -147,14 +149,14 @@ const FinishForm = async () => {
   project.companyId = currentUser.data.companyId;
   console.log(project);
  await API.createProject(project, token);
-//window.location.href = "./../Dashboard/dashboard.html";
+ API.GoToRecruiterDashboard();
 };
 
 const FillProjectSummary = () => {
   if (project.name && projectNameHTML)
     projectNameHTML.textContent = project.name;
   if (project.priceTotal && projectBudgetHTML)
-    projectBudgetHTML.textContent = project.priceTotal;
+    projectBudgetHTML.textContent = currencyFormatter(project.priceTotal);
   if (project.timelineDate && projectDeadlineHTML)
     projectDeadlineHTML.textContent = project.timelineDate;
 }; //Closes FillProjecSummary method

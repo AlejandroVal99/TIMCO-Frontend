@@ -2,9 +2,45 @@ import ListCard from "../../Components/ListCard/ListCard.js";
 import API from "../../src/TimcoApi.js";
 
 const urlParams = new URLSearchParams(window.location.search);
+const backBtn = document.querySelector("#backButton");
+backBtn.addEventListener('click',()=>{
+  window.history.back();
+})
+const profileId = urlParams.get("studentId");
+const designSkills = ["Research", "UX design", "UI design", "Prototyping"];
+const developmentSkills = ["HTML", "CSS", "Javascript", "Wordpress"];
+const marketingSkills = [
+  "Google Ads",
+  "Facebook Ads",
+  "Strategy",
+  "Prototyping",
+];
 
-const profileId = urlParams.get("profileId");
-
+const reviewsData = [
+  {
+    title: "Sistema de Interfaces",
+    date: "Julio 14/22 - Julio 27/22",
+    raiting: 4,
+    description:
+      "Muy buen trabajo, creo que hay algunas cosas por mejorar pero cumplio con el tiempo adecuado y los requerimientos solicitados",
+  },
+  {
+    title: "Sistema de Interfaces",
+    date: "Julio 14/22 - Julio 27/22",
+    raiting: 4,
+    description:
+      "Muy buen trabajo, creo que hay algunas cosas por mejorar pero cumplio con el tiempo adecuado y los requerimientos solicitados",
+  
+  },
+  {
+    title: "Sistema de Interfaces",
+    date: "Julio 14/22 - Julio 27/22",
+    raiting: 4,
+    description:
+      "Muy buen trabajo, creo que hay algunas cosas por mejorar pero cumplio con el tiempo adecuado y los requerimientos solicitados",
+  
+  },
+];
 
 const ProfileImage = document.querySelector(".overview__header__logo");
 const ProfileName = document.querySelector(".overview__header__profileName");
@@ -20,6 +56,7 @@ const ProfileDescription = document.querySelector(
 );
 
 const ReviewStars = document.querySelectorAll(".overview__review__star");
+console.log(ReviewStars);
 const ReviewSummary = document.querySelector(".overview__reviews__summary");
 
 const ProfileBrief = document.querySelector(".overview__body__projectBrief");
@@ -41,54 +78,110 @@ const experienceCard = document.querySelector(
 
 const RenderProfileData = async (key) => {
   if (!key) return;
-  const profileData = await API.GetProfileByID("1b14bcb9-1c05-44e6-8bcb-c0136b333d9c");
+  const profileData = await API.GetProfileByID(key);
 
   FillInformation(profileData);
 };
 
 const FillInformation = (profileData) => {
-  console.log("NAME",profileData.data.aboutMe)
+  console.log("NAME", profileData.data.area.name);
   if (!profileData) return;
 
-  if (ProfileImage) ProfileImage.src = API.GetStaticRoute(`Components/Sidebar/resources/profilePicture.png`);
+  if (ProfileImage)
+    ProfileImage.src = API.GetStaticRoute(
+      `Components/Sidebar/resources/profilePicture.png`
+    );
   if (ProfileName) ProfileName.textContent = profileData.data.name;
   if (ProfileUniversity)
     ProfileUniversity.textContent = profileData.data.university.name;
-  //if (ProfileTypeIcon) ProfileTypeIcon.src = profileData.sprites.front_default;
 
-  if (ProfileDescription) ProfileDescription.textContent = profileData.data.aboutMe;
+  if (ProfileDescription)
+    ProfileDescription.textContent = profileData.data.aboutMe;
 
-  if (ProfileBrief) ProfileBrief.textContent = profileData.pokedex;
+  if (ProfileTypeIcon) {
+    switch (profileData.data.area.areaId) {
+      case 1:
+        ProfileTypeIcon.src = API.GetStaticRoute(
+          "Pages/Profile/resources/design.png"
+        );
+        break;
+
+      case 2:
+        ProfileTypeIcon.src = API.GetStaticRoute(
+          "Pages/Profile/resources/development.png"
+        );
+        break;
+
+      default:
+        ProfileTypeIcon.src = API.GetStaticRoute(
+          "Pages/Profile/resources/marketing.png"
+        );
+        break;
+    }
+  }
 
   if (ProfileSkills) {
     ProfileSkills.innerHTML = null;
-    profileData.moves.forEach((move) => {
-      const skill = document.createElement("p");
-      skill.classList.add("overview__body__skill");
-      skill.textContent = move.move.name;
-      ProfileSkills.append(skill);
-    });
+
+    switch (profileData.data.area.areaId) {
+      case 1:
+        designSkills.forEach((move) => {
+          const skill = document.createElement("p");
+          skill.classList.add("overview__body__skill");
+          skill.textContent = move;
+          ProfileSkills.append(skill);
+        });
+        break;
+
+      case 2:
+        developmentSkills.forEach((move) => {
+          const skill = document.createElement("p");
+          skill.classList.add("overview__body__skill");
+          skill.textContent = move;
+          ProfileSkills.append(skill);
+        });
+        break;
+
+      default:
+        marketingSkills.forEach((move) => {
+          const skill = document.createElement("p");
+          skill.classList.add("overview__body__skill");
+          skill.textContent = move;
+          ProfileSkills.append(skill);
+        });
+        break;
+    }
   }
 
-  if (experienceTitle)
-    experienceTitle.textContent = `Experiencia (${profileData.abilities.length} proyectos)`;
+  if (experienceTitle) experienceTitle.textContent = `Experiencia 7 proyectos`;
+  //experienceTitle.textContent = `Experiencia (${profileData.abilities.length} proyectos)`;
 
-  profileData.abilities.forEach((ability) => {
+  reviewsData.forEach((ability) => {
     const card = experienceCard.cloneNode(true);
     card.classList.remove("hidden");
     experienceContainer.appendChild(card);
-    card.querySelector(".experienceTitle").textContent = ability.ability.name;
+    card.querySelector(".experienceTitle").textContent = ability.title;
+    card.querySelector(".experienceDate").textContent = ability.date;
+    card.querySelector(".experienceDescription").textContent = ability.description;
+    let raitingText = card.querySelector("experienceRaiting");
+    let stars = card.querySelectorAll("experienceRaitingStar");
+    let rating = map(380, 20, 400, 1, 5).toFixed(2);
+  stars.forEach((star, index) => {
+    star.classList.remove("filled");
+    raitingText.textContent = rating + " de 7 reseñas";
+    if (index <= rating - 1) star.classList.add("filled");
+  });
   });
 
-  if (ProfileType) ProfileType.textContent = profileData.types[0].type.name;
-  if (WebsiteButton) WebsiteButton.href = profileData.species.url;
+  if (ProfileType) ProfileType.textContent = profileData.data.area.name;
+  if (WebsiteButton) WebsiteButton.href = profileData.portfolio;
   if (LinkedInButton)
-    LinkedInButton.href = profileData.location_area_encounters;
+    LinkedInButton.href = profileData.linkedin;
 
-  const rating = map(profileData.base_experience, 20, 400, 1, 5).toFixed(2);
+  const rating = map(380, 20, 400, 1, 5).toFixed(2);
   ReviewStars.forEach((star, index) => {
     star.classList.remove("filled");
-    if (ReviewSummary) ReviewSummary.textContent = rating + " de 16 reseñas";
+    if (ReviewSummary) ReviewSummary.textContent = rating + " de 7 reseñas";
     if (index <= rating - 1) star.classList.add("filled");
   });
 };
