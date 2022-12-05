@@ -13,8 +13,8 @@ const CandidateCard = (() => {
       name: 0,
     },
     studentData = {
-      university: "Universidad Icesi",
-      area: "Diseño"
+      university,
+      area,
     },
     projectTheme = "#F7863C",
     primaryBtn = { label: "primary", onclick: () => {}, visible: true },
@@ -67,18 +67,16 @@ const CandidateCard = (() => {
     );
 
     universitySpan.append(universitySpanIcon);
-    
+
     const universityName = document.createElement("small");
+
     universityName.textContent = studentData.university;
-    
+
     universitySpan
-    .appendChild(document.createElement("p"))
-    .appendChild(universityName);
-    
+      .appendChild(document.createElement("p"))
+      .appendChild(universityName);
+
     candidateDetails.append(universitySpan);
-
-
-
 
     const areaSpan = document.createElement("span");
     const areaSpanIcon = document.createElement("img");
@@ -87,16 +85,12 @@ const CandidateCard = (() => {
     );
     areaSpan.append(areaSpanIcon);
     const areaName = document.createElement("small");
-    areaName.textContent = studentData.area;
 
-    areaSpan
-      .appendChild(document.createElement("p"))
-      .appendChild(areaName);
+    areaName.textContent = studentData.area;
+//debugger;
+    areaSpan.appendChild(document.createElement("p")).appendChild(areaName);
 
     candidateDetails.append(areaSpan);
-    
-    
-   
 
     const cardControls = document.createElement("section");
     cardControls.classList.add("listCard__controls");
@@ -111,15 +105,19 @@ const CandidateCard = (() => {
 
       cardControls.append(deliverBtn);
 
-      if (candidate.hasOwnProperty("id") && candidate.hasOwnProperty("studentId")) {
-        let { id, studentId } = candidate;
-        deliverBtn.value = `${id}/${studentId}`;
+      if (
+        candidate.hasOwnProperty("id") &&
+        candidate.hasOwnProperty("studentId")
+      ) {
+        let { id, studentId, name } = candidate;
+        deliverBtn.value = `${id}/${studentId}/${name}`;
         deliverBtn.addEventListener("click", function (e) {
           let value = e.target.value;
           value = value.split("/");
           return primaryBtn.onclick({
             candidateId: value[0],
             studentId: value[1],
+            candidateName: value[2],
           });
         });
       } else {
@@ -138,11 +136,16 @@ const CandidateCard = (() => {
       // briefBtn.onclick = secondaryBtn.onclick;
 
       if (candidate.hasOwnProperty("id")) {
-        let { id } = candidate;
-        briefBtn.value = id;
+        let { id, name } = candidate;
+        // briefBtn.value = id;
+        briefBtn.value = `${id}/${name}`;
         briefBtn.addEventListener("click", function (e) {
           let value = e.target.value;
-          return secondaryBtn.onclick(value);
+          value = value.split("/");
+          return secondaryBtn.onclick({
+            candidateId: value[0],
+            candidateName: value[1],
+          });
         });
       } else {
         briefBtn.onclick = secondaryBtn.onclick;

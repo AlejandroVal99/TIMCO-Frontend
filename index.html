@@ -39,7 +39,7 @@
             <img class="landingPage__header__logo__logo" src="./public/Pages/LandingPage/resources/images/logotype.png"
                 alt="">
         </a>
-        <a href="./public/Pages/Student/Login/login.html"><button class="cta_button">Ingresar</button></a>
+        <button id="userTypeBtn" class="cta_button">Ingresar</button>
     </header>
 
     <!----------------------------------------->
@@ -194,21 +194,21 @@
 
             <article class="landingPage__ourProcess__process__step">
                 <img src="./public/Components/LandingOurProcess/resources/step1.png" alt="" srcset="">
-                <p><small>Encontrar talento por habilidades que se ajusten a tus necesidades</small></p>
+                <p><small>Formulario de inscripción a nuestra plataforma</small></p>
             </article>
             <div class="landingPage__ourProcess__process__separator">
                 <img src="./public/Components/LandingOurProcess/resources/arrowHead.png" alt="" srcset="">
             </div>
             <article class="landingPage__ourProcess__process__step">
                 <img src="./public/Components/LandingOurProcess/resources/step2.png" alt="" srcset="">
-                <p><small>Encontrar talento por habilidades que se ajusten a tus necesidades</small></p>
+                <p><small>Validación de soft y hard skills de los estudiantes</small></p>
             </article>
             <div class="landingPage__ourProcess__process__separator">
                 <img src="./public/Components/LandingOurProcess/resources/arrowHead.png" alt="" srcset="">
             </div>
             <article class="landingPage__ourProcess__process__step">
                 <img src="./public/Components/LandingOurProcess/resources/step3.png" alt="" srcset="">
-                <p><small>Encontrar talento por habilidades que se ajusten a tus necesidades</small></p>
+                <p><small>Ofertas laborales de acuerdo a las habilidades y necesidades de las empresas</small></p>
             </article>
             <div class="landingPage__ourProcess__process__separator">
                 <img src="./public/Components/LandingOurProcess/resources/arrowHead.png" alt="" srcset="">
@@ -216,7 +216,7 @@
 
             <article class="landingPage__ourProcess__process__step">
                 <img src="./public/Components/LandingOurProcess/resources/step4.png" alt="" srcset="">
-                <p><small>Encontrar talento por habilidades que se ajusten a tus necesidades</small></p>
+                <p><small>Gestionar, entregar y certificar a los estudiantes de acuerdo a los proyectos realizados</small></p>
             </article>
 
         </div>
@@ -262,6 +262,32 @@
             </div>
         </div>
     </footer>
+    <div id="SelectUserModal" class="modal hidden">
+        <div class="modalPanel">
+          <div class="modalPanel__header">
+            <div class="modalPanel__header__info">
+              <h5>¿Qué tipo usuarios eres?</h5>
+            </div>
+            <button class="closeModal__btn" id="closeModal__btn">
+              <img src="./public/Pages/Projects/resources/close.png" alt="close" />
+            </button>
+          </div>
+          <div class="mainCardsForm__form">
+            <a style="text-decoration:none" href="./public/Pages/Recruiter/Login/login.html">
+                <label class="selectable_card" style="background-color: #E0FE68;" for="UX/UI">
+                    <img src="./public/Components/Sidebar/resources/profilePicture2.png">
+                    <p>Empresa</p>
+                </label>
+            </a>
+            <a style="text-decoration:none"  href="./public/Pages/Student/Login/login.html">
+                <label class="selectable_card" style="background-color:#8AC2DD;" for="Dev">
+                    <img src="./public/Components/Sidebar/resources/profilePicture1.png">
+                    <p>Estudiante</p>
+                </label>
+            </a>
+          </div>
+        </div>
+    </div>
     <!------------------------------------------->
     <!----------------Scripts--------------------->
     <!------------------------------------------->

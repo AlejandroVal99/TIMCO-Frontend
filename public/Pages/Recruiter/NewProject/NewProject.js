@@ -149,7 +149,7 @@ const FinishForm = async () => {
   project.companyId = currentUser.data.companyId;
   console.log(project);
  await API.createProject(project, token);
- API.GoToRecruiterDashboard();
+ API.GoToRecruiterDashboardNewProject();
 };
 
 const FillProjectSummary = () => {

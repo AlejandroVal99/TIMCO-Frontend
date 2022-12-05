@@ -1,11 +1,13 @@
 import ListCard from "../../Components/ListCard/ListCard.js";
 import API from "../../src/TimcoApi.js";
+import parseJwt from "../../src/utils/parseJWT.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const backBtn = document.querySelector("#backButton");
-backBtn.addEventListener('click',()=>{
+backBtn.addEventListener("click", () => {
   window.history.back();
-})
+});
+let userData = {};
 const profileId = urlParams.get("studentId");
 const designSkills = ["Research", "UX design", "UI design", "Prototyping"];
 const developmentSkills = ["HTML", "CSS", "Javascript", "Wordpress"];
@@ -13,7 +15,7 @@ const marketingSkills = [
   "Google Ads",
   "Facebook Ads",
   "Strategy",
-  "Prototyping",
+  "SEM",
 ];
 
 const reviewsData = [
@@ -27,18 +29,16 @@ const reviewsData = [
   {
     title: "Sistema de Interfaces",
     date: "Julio 14/22 - Julio 27/22",
-    raiting: 4,
+    raiting: 4.6,
     description:
       "Muy buen trabajo, creo que hay algunas cosas por mejorar pero cumplio con el tiempo adecuado y los requerimientos solicitados",
-  
   },
   {
     title: "Sistema de Interfaces",
     date: "Julio 14/22 - Julio 27/22",
-    raiting: 4,
+    raiting: 4.7,
     description:
       "Muy buen trabajo, creo que hay algunas cosas por mejorar pero cumplio con el tiempo adecuado y los requerimientos solicitados",
-  
   },
 ];
 
@@ -83,13 +83,34 @@ const RenderProfileData = async (key) => {
   FillInformation(profileData);
 };
 
+const getUserData = () => {
+  const token = localStorage.getItem("token");
+  userData = parseJwt(token).data;
+  let userName = userData.name;
+  let userDetail;
+
+  if (API.IsRecruiterLogged()) {
+    userDetail = "Recruiter";
+    console.log(userData);
+    //ProfilePicture.src = userData.profileImage;
+  } else {
+    userDetail = userData.area.name;
+  }
+
+  const userNameSideBar = document.getElementById("userCurrentName");
+  const userDetailSideBar = document.getElementById("userCurrentDetail");
+
+  userNameSideBar.innerHTML = userName;
+  //userDetailSideBar.innerHTML = userDetail;
+};
+
 const FillInformation = (profileData) => {
   console.log("NAME", profileData.data.area.name);
   if (!profileData) return;
 
   if (ProfileImage)
     ProfileImage.src = API.GetStaticRoute(
-      `Components/Sidebar/resources/profilePicture.png`
+      `Components/Sidebar/resources/profilePicture1.png`
     );
   if (ProfileName) ProfileName.textContent = profileData.data.name;
   if (ProfileUniversity)
@@ -153,7 +174,7 @@ const FillInformation = (profileData) => {
     }
   }
 
-  if (experienceTitle) experienceTitle.textContent = `Experiencia 7 proyectos`;
+  if (experienceTitle) experienceTitle.textContent = `Experiencia 3 proyectos`;
   //experienceTitle.textContent = `Experiencia (${profileData.abilities.length} proyectos)`;
 
   reviewsData.forEach((ability) => {
@@ -162,30 +183,31 @@ const FillInformation = (profileData) => {
     experienceContainer.appendChild(card);
     card.querySelector(".experienceTitle").textContent = ability.title;
     card.querySelector(".experienceDate").textContent = ability.date;
-    card.querySelector(".experienceDescription").textContent = ability.description;
-    let raitingText = card.querySelector("experienceRaiting");
-    let stars = card.querySelectorAll("experienceRaitingStar");
-    let rating = map(380, 20, 400, 1, 5).toFixed(2);
-  stars.forEach((star, index) => {
-    star.classList.remove("filled");
-    raitingText.textContent = rating + " de 7 reseñas";
-    if (index <= rating - 1) star.classList.add("filled");
-  });
+    card.querySelector(".experienceDescription").textContent =
+      ability.description;
+    //  let raitingText = (card.querySelector(".experienceRaiting").textContent =  ability.raiting);
+    // let stars = card.querySelectorAll(".experienceRaitingStar");
+    // let rating = map(380, 20, 400, 1, 5).toFixed(2);
+    // stars.forEach((star, index) => {
+    //   star.classList.remove("filled");
+    //   raitingText.textContent = rating + " de 3 reseñas";
+    //   if (index <= rating - 1) star.classList.add("filled");
+    // });
   });
 
   if (ProfileType) ProfileType.textContent = profileData.data.area.name;
   if (WebsiteButton) WebsiteButton.href = profileData.portfolio;
-  if (LinkedInButton)
-    LinkedInButton.href = profileData.linkedin;
+  if (LinkedInButton) LinkedInButton.href = profileData.linkedin;
 
   const rating = map(380, 20, 400, 1, 5).toFixed(2);
   ReviewStars.forEach((star, index) => {
     star.classList.remove("filled");
-    if (ReviewSummary) ReviewSummary.textContent = rating + " de 7 reseñas";
+    if (ReviewSummary) ReviewSummary.textContent = rating + " de 3 reseñas";
     if (index <= rating - 1) star.classList.add("filled");
   });
 };
 
+getUserData();
 RenderProfileData(profileId);
 
 const map = (value, x1, y1, x2, y2) =>

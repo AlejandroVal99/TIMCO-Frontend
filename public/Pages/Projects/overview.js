@@ -8,6 +8,7 @@ import { timeFromNow } from "../../src/utils/timeHelper.js";
 import currencyFormatter from "../../src/utils/currencyHelper.js";
 
 let candidates = [];
+
 let userData = {};
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -18,6 +19,9 @@ const owned = !!urlParams.get("owned");
 const usertype = urlParams.get("user");
 
 const projectData = await API.GetProjectByID(projectKey);
+console.log(projectData);
+
+candidates = await API.GetCandidatesByProjectId(projectKey);
 
 const ProfilePicture = document.getElementById("profile-picture");
 
@@ -31,6 +35,7 @@ const ProjectDescription = document.querySelector(
 const btnSignOut = document.getElementById("signOutButton");
 const ProjectBudget = document.querySelector(".overview__header__budget");
 const ProjectDeadline = document.querySelector(".overview__header__deadline");
+const ProjectCompany = document.querySelector(".overview__header__company");
 
 const ProjectBrief = document.querySelector(".overview__body__projectBrief");
 const ProjectBriefContainer = document.querySelector(
@@ -48,8 +53,11 @@ const DeliverButton = document.querySelector("#DeliverBtn");
 const ApplyButton = document.querySelector("#ApplyBtn");
 
 const DeliverModal = document.querySelector("#DeliverModal");
+
 const ApplyModal = document.querySelector("#ApplyModal");
 const AcceptDeliverModal = document.querySelector("#AcceptDeliverModal");
+const AcceptStudentModal = document.querySelector("#AcceptStudentModal");
+const RejectStudentModal = document.querySelector("#RejectStudentModal");
 const ShowDeliverBtn = document.querySelector("#showDeliver");
 
 const ApplyModalForm = document.getElementById("applyModalForm");
@@ -58,9 +66,27 @@ const SkillContainer = document.getElementById("skills__required__container");
 
 const btnReturnToDashBoard = document.getElementById("btnReturnToDashboard");
 
+const AssignedStudentContainer = document.querySelector(
+  ".assignedStudent__container"
+);
+const AssignedStudentName = document.querySelector(
+  ".assignedStudent__information__studentName"
+);
+const AssignStudentGoToProfile = document.querySelector(
+  ".assignedStudent__information__goToProfile"
+);
+const AssignedStudentArea = document.querySelector(
+  ".assignedStudent__information__area"
+);
+const AssignedStudentUniveristy = document.querySelector(
+  ".assignedStudent__information__university"
+);
+
 btnReturnToDashBoard.addEventListener("click", () => {
+
   if (IsRecruiterLogged) {
     API.GoToRecruiterDashboard();
+    //window.history.back();
   } else {
     API.GoToStudentDashboard();
   }
@@ -77,6 +103,11 @@ const getUserData = () => {
     ProfilePicture.src = userData.profileImage;
   } else {
     userDetail = userData.area.name;
+    ProfilePicture.src = userData.profileImage;
+   
+  
+    console.log(userData);
+
   }
 
   const userNameSideBar = document.getElementById("userCurrentName");
@@ -96,11 +127,13 @@ const candidatesContainer = document.querySelector(
 
 if (usertype != "recruiter") {
   if (candidatesTitle) candidatesTitle.remove();
+  if(AssignedStudentContainer) AssignedStudentContainer.remove();
   if (candidatesContainer) candidatesContainer.remove();
   if (
     projectData.state.stateId === constants.states.FINISHED_PROJECT_ID ||
     projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID
   ) {
+    
     if (DeliverButton) {
       // DeliverButton.disabled = true;
       DeliverButton.remove();
@@ -176,11 +209,12 @@ if (DeliverModal) {
     [...e.target.elements].forEach(
       (element, index) => (Deliver[element.name] = element.value)
     );
-
+    const deliverUrl = await API.UploadProject(Deliver);
     debugger;
-    if (await API.UploadProject(Deliver)) {
-      alert("Proyecto entregado exitosamente");
-      window.location.reload();
+    if (deliverUrl) {
+      //alert("Proyecto entregado exitosamente");
+      DeliverModal.classList.add("hidden");
+      location.reload(true);
     }
   });
 }
@@ -212,12 +246,11 @@ if (ApplyModal) {
 
     const candidate = await API.JoinProjectRequest(Request);
     if (candidate) {
-
       alert("Petición enviada exitosamente");
       ApplyButton.remove();
       ShowDeliverBtn.remove();
       ApplyModal.classList.add("hidden");
-      //location.reload(true);
+      location.reload(true);
     }
   });
 }
@@ -230,96 +263,175 @@ btnSignOut.addEventListener("click", () => {
   }
 });
 
-if(projectData.state.stateId === constants.states.FINISHED_PROJECT_ID &&usertype != "recruiter" ){
-
-}else{
-ShowDeliverBtn.remove();
+if (
+  projectData.state.stateId === constants.states.FINISHED_PROJECT_ID &&
+  usertype != "recruiter"
+) {
+} else {
+  //ShowDeliverBtn.remove();
 }
 
-
-if(AcceptDeliverBtn){
+if (AcceptDeliverBtn) {
   AcceptDeliverBtn.addEventListener("click", () => {
     AcceptDeliverModal.classList.remove("hidden");
   });
 }
 const deliverOptions = () => {
-
-
   if (usertype != "recruiter") {
+
    
-    if(ShowDeliverBtn){
+    if (ShowDeliverBtn) {
       ShowDeliverBtn.href = projectData.urlDelivery;
-      
     }
     AcceptDeliverBtn.remove();
 
-    
+    if (projectData.state.stateId === constants.states.UNASSIGNED_PROJECT_ID) {
+      if(ShowDeliverBtn)ShowDeliverBtn.remove();
+    }
+
+    if (projectData.state.stateId === constants.states.INREVIEW_PROJECT_ID) {
+      if(DeliverButton)DeliverButton.remove();
+    }
+
   } else {
-   
-
-
-    if(projectData.state.stateId === constants.states.INREVIEW_PROJECT_ID){
-      if(ShowDeliverBtn){
+    if (projectData.state.stateId === constants.states.INREVIEW_PROJECT_ID) {
+      if (ShowDeliverBtn) {
         ShowDeliverBtn.href = projectData.urlDelivery;
-        
       }
-      
 
-      if(AcceptDeliverModal){
-        AcceptDeliverModal.querySelector(".cancelBtn").addEventListener("click", () => {
-          AcceptDeliverModal.classList.add("hidden");
-        });
-      
+      if (AcceptDeliverModal) {
+        AcceptDeliverModal.querySelector(".cancelBtn").addEventListener(
+          "click",
+          () => {
+            AcceptDeliverModal.classList.add("hidden");
+          }
+        );
+
         AcceptDeliverModal.querySelector(".closeModal__btn").addEventListener(
           "click",
           () => {
             AcceptDeliverModal.classList.add("hidden");
           }
         );
-      
+
         AcceptDeliverModal.addEventListener("click", (event) => {
           if (event.target != AcceptDeliverModal) return;
-      
+
           AcceptDeliverModal.classList.add("hidden");
         });
-      
-        AcceptDeliverModal.querySelector("form").addEventListener("submit", async (e) => {
-          e.preventDefault();
-      
-          const Submission = {};
-          Submission.projectId = projectData.projectId;
-          Submission.companyId = projectData.companyId;
-          Submission.serviceId = projectData.serviceId;
-          Submission.studentId = projectData.studentId;
-          Submission.stateId = constants.states.FINISHED_PROJECT_ID;
-      
-          [...e.target.elements].forEach(
-            (element, index) => (Submission[element.name] = element.value)
-          );
-      
-          debugger;
-          if (await API.UploadProject(Submission)) {
-            alert("Proyecto aceptado exitosamente");
-            window.location.reload();
+
+        AcceptDeliverModal.querySelector("form").addEventListener(
+          "submit",
+          async (e) => {
+            e.preventDefault();
+
+            const Submission = {};
+            Submission.projectId = projectData.projectId;
+            Submission.companyId = projectData.companyId;
+            Submission.serviceId = projectData.serviceId;
+            Submission.studentId = projectData.studentId;
+            Submission.stateId = constants.states.FINISHED_PROJECT_ID;
+
+            [...e.target.elements].forEach(
+              (element, index) => (Submission[element.name] = element.value)
+            );
+            const acceptSubmission = await API.UploadProject(Submission);
+            if (acceptSubmission) {
+              alert("Proyecto aceptado exitosamente");
+              AcceptDeliverModal.classList.add("hidden");
+              window.location.reload(true);
+            }
           }
-        });
+        );
       }
-    }else if (projectData.state.stateId === constants.states.FINISHED_PROJECT_ID){
+    } else if (
+      projectData.state.stateId === constants.states.FINISHED_PROJECT_ID
+    ) {
       AcceptDeliverBtn.remove();
-      if(ShowDeliverBtn){
+      if (ShowDeliverBtn) {
         ShowDeliverBtn.href = projectData.urlDelivery;
-        
       }
-    }else{
+    } else {
       ShowDeliverBtn.remove();
       AcceptDeliverBtn.remove();
-
-    };
     }
   }
-  
 
-  
+};
+
+const showAcceptStudentModal = ({ candidateId, studentId, candidateName }) => {
+  AcceptStudentModal.classList.remove("hidden");
+
+  console.log("NAME MODAL:", candidateName);
+
+  if (AcceptStudentModal) {
+    AcceptStudentModal.querySelector(".cancelBtn").addEventListener(
+      "click",
+      () => {
+        AcceptStudentModal.classList.add("hidden");
+      }
+    );
+
+    AcceptStudentModal.querySelector(".closeModal__btn").addEventListener(
+      "click",
+      () => {
+        AcceptStudentModal.classList.add("hidden");
+      }
+    );
+    AcceptStudentModal.querySelector("span").textContent = candidateName;
+
+    AcceptStudentModal.addEventListener("click", (event) => {
+      if (event.target != AcceptStudentModal) return;
+
+      AcceptStudentModal.classList.add("hidden");
+    });
+
+    AcceptStudentModal.querySelector("form").addEventListener(
+      "submit",
+      async (e) => {
+        e.preventDefault();
+        onAcceptCandidate({ candidateId, studentId });
+      }
+    );
+  }
+};
+
+const showRejectStudentModal = ({ candidateId, candidateName }) => {
+  RejectStudentModal.classList.remove("hidden");
+
+  console.log("NAME REJCT NMOOO:", candidateName);
+  if (RejectStudentModal) {
+    RejectStudentModal.querySelector(".cancelBtn").addEventListener(
+      "click",
+      () => {
+        RejectStudentModal.classList.add("hidden");
+      }
+    );
+    RejectStudentModal.querySelector("span").textContent = candidateName;
+
+    RejectStudentModal.querySelector(".closeModal__btn").addEventListener(
+      "click",
+      () => {
+        RejectStudentModal.classList.add("hidden");
+      }
+    );
+
+    RejectStudentModal.addEventListener("click", (event) => {
+      if (event.target != RejectStudentModal) return;
+
+      RejectStudentModal.classList.add("hidden");
+    });
+
+    RejectStudentModal.querySelector("form").addEventListener(
+      "submit",
+      async (e) => {
+        e.preventDefault();
+
+        onRejectCandidate(candidateId);
+      }
+    );
+  }
+};
 
 const RenderProjectData = async (key) => {
   if (!key) return;
@@ -328,13 +440,13 @@ const RenderProjectData = async (key) => {
 
 const loadCandidates = async (projectKey) => {
   candidates = await API.GetCandidatesByProjectId(projectKey);
+
   drawCandidateCard(candidates);
 };
 
 const drawCandidateCard = (candidates) => {
   let studentId = 0;
   let companyId = 0;
-  debugger;
 
   if (!candidates || candidates.length === 0) {
     candidatesContainer.appendChild(
@@ -347,9 +459,8 @@ const drawCandidateCard = (candidates) => {
     return;
   }
 
-    // New candidate Card component
+  // New candidate Card component
   candidates.forEach((candidate) => {
-    debugger;
     companyId = candidate.companyId;
     studentId = candidate.student.studentId;
 
@@ -362,22 +473,23 @@ const drawCandidateCard = (candidates) => {
       },
       primaryBtn: {
         label: "Aceptar",
-        onclick: ({ candidateId, studentId }) => {
-          onAcceptCandidate({ candidateId, studentId });
+        onclick: ({ candidateId, studentId, candidateName }) => {
+          showAcceptStudentModal({ candidateId, studentId, candidateName });
         },
         visible: true,
       },
       secondaryBtn: {
         label: "Rechazar",
-        onclick: (candidateId) => {
-          onRejectCandidate(candidateId);
+        onclick: ({ candidateId, candidateName }) => {
+          showRejectStudentModal({ candidateId, candidateName });
         },
         visible: true,
       },
-      student:{
-        university: candidate.student.name,
-        area: candidate.student.area.name
-      }
+      studentData: {
+        university: candidate.student.university.name,
+        area: candidate.student.area.name,
+      },
+    
     });
 
     candidatesContainer.appendChild(card);
@@ -426,6 +538,8 @@ const onAcceptCandidate = async ({ candidateId, studentId }) => {
     candidateId: parseInt(candidateId),
   };
 
+  console.log("ACCET DATA:", data);
+
   await API.PutCandidateProject({
     candidateId: data.candidateId,
     stateId: constants.states.APPROVE_PROJECT_ID,
@@ -441,14 +555,29 @@ const onAcceptCandidate = async ({ candidateId, studentId }) => {
   const othersCandidates = candidates.filter(
     (candidate) => candidate.candidateId !== parseInt(candidateId)
   );
-  othersCandidates.forEach((rejectCandidate) => {
-    API.PutCandidateProject({
-      candidateId: rejectCandidate.candidateId,
-      stateId: constants.states.REJECT_PROJECT_ID,
+  if (othersCandidates.lenght > 0) {
+    othersCandidates.forEach((rejectCandidate) => {
+      API.PutCandidateProject({
+        candidateId: rejectCandidate.candidateId,
+        stateId: constants.states.REJECT_PROJECT_ID,
+      });
     });
-  });
+  }
 
   location.reload();
+};
+
+const drawAssignedStudent = () => {
+  if (projectData.student === null || projectData.student === undefined) {
+    if (AssignedStudentContainer) AssignedStudentContainer.remove();
+  } else {
+    if (AssignedStudentName) AssignedStudentName.textContent = projectData.student.name;
+    if (AssignedStudentUniveristy) AssignedStudentUniveristy.textContent = projectData.student.university.name;
+    if (AssignedStudentArea) AssignedStudentArea.textContent = projectData.student.area.name;
+    if(AssignStudentGoToProfile)AssignStudentGoToProfile.href = API.GetStaticRoute(
+      `Pages/Profile/profiles.html?studentId=${projectData.studentId}`
+    );
+  }
 };
 
 const onRejectCandidate = async (candidateId) => {
@@ -486,9 +615,20 @@ const FillInformation = (projectData) => {
         "#8ac2dd",
         "inProgressState"
       );
+      if(projectData.urlDelivery === null || projectData.urlDelivery === undefined){
+        ShowDeliverBtn.remove();
+      }
       break;
     case constants.states.WAITING_PROJECT_ID:
-      setProjectBadgeState("Proyecto a la espera", "#e0fe68", "waitingState");
+      console.log("Entro a proyectos en espera");
+     
+      if (usertype != "recruiter") {
+
+        setProjectBadgeState("Proyecto a la espera de aceptación", "#e0fe68", "waitingState");
+       
+      }else{
+        setProjectBadgeState("Proyecto a la espera de candidatos", "#e0fe68", "waitingState");
+      }
       break;
     case constants.states.REJECT_PROJECT_ID:
       setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
@@ -498,14 +638,37 @@ const FillInformation = (projectData) => {
       break;
     default:
       setProjectBadgeState("Proyecto a la espera", "#e0fe68", "waitingState");
+      if (usertype != "recruiter") {
+
+        setProjectBadgeState("Proyecto a la espera de candidatos", "#e0fe68", "waitingState");
+        if (candidates === null ||candidates === undefined){
+      
+     
+        }else{
+          let candidatesIds = candidates.map(candidate => {
+            let candidateId = candidate.studentId;
+            return candidateId;
+          });
+    
+          let iAmCandidate = candidatesIds.includes(userData.studentId);
+          if(iAmCandidate){
+            setProjectBadgeState("La empresa está revisando tu aplicación", "#e0fe68", "waitingState");
+            ApplyButton.remove();
+            ShowDeliverBtn.remove();
+          }
+        }
+      }else{
+        setProjectBadgeState("Proyecto a la espera de candidatos", "#e0fe68", "waitingState");
+      }
       break;
   }
-
-  if (
-    projectData.studentId !== userData.studentId &&
-    projectData.state.stateId !== constants.states.UNASSIGNED_PROJECT_ID
-  ) {
-    setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
+  if (usertype !== "recruiter") {
+    if (
+      projectData.studentId !== userData.studentId &&
+      projectData.state.stateId !== constants.states.UNASSIGNED_PROJECT_ID
+    ) {
+      setProjectBadgeState("Rechazado", "#f7863c", "rejectState");
+    }
   }
 
   if (ProjectBudget)
@@ -533,6 +696,7 @@ const FillInformation = (projectData) => {
   }
 
   if (ProjectBrief) ProjectBrief.textContent = projectData.description;
+  if(ProjectCompany) ProjectCompany.textContent = projectData.company.name;
 
   if (usertype != "recruiter") {
     if (candidatesTitle) candidatesTitle.remove();
@@ -591,7 +755,9 @@ const FillInformation = (projectData) => {
   if (candidatesContainer && usertype === "recruiter") {
     loadCandidates(projectKey);
   }
+  projectData;
 
+  
   // if (WebsiteButton) WebsiteButton.href = projectData.species.url;
   // if (LinkedInButton)
   //   LinkedInButton.href = projectData.location_area_encounters;
@@ -600,4 +766,5 @@ const FillInformation = (projectData) => {
 // RenderProjectData(projectKey);
 getUserData();
 deliverOptions();
+drawAssignedStudent();
 // loadCandidates(projectKey);

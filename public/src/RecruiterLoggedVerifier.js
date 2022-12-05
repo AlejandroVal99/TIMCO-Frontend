@@ -3,6 +3,6 @@ import API from "./TimcoApi.js"
 (() => {
 
 
-    if (!API.IsRecruiterLogged()) API.GoToStudentLogin();
+    if (!API.IsRecruiterLogged()) API.GoToRecruiterLogin();
 
 })()

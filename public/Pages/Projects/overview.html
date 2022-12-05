@@ -16,8 +16,16 @@
     />
     <!-- <link rel="stylesheet" href="./../../Components/ProjectCard/project_card.css"/> -->
     <link rel="stylesheet" href="./../../Components/ListCard/listCard.css" />
-    <link rel="stylesheet" href="../../Components/CandidateCard/candidate_card.css">
+    <link
+      rel="stylesheet"
+      href="../../Components/CandidateCard/candidate_card.css"
+    />
     <link rel="stylesheet" href="./overview.css" />
+    <link
+      rel="shortcut icon"
+      href="./../../LandingPage/resources/images/favicon.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <nav class="sidebar">
@@ -71,7 +79,8 @@
     </nav>
     <main>
       <p id="btnReturnToDashboard">
-        <img src="./resources/back%20icon.png" alt="back%20icon" /> Regresar
+        <img src="./resources/back%20icon.png" id="backBtn" alt="back%20icon" />
+        Regresar
       </p>
       <header class="overview__header">
         <img
@@ -123,10 +132,68 @@
               </p>
             </div>
           </div>
+          <div>
+            <p>
+              <strong><small>Empresa</small></strong>
+            </p>
+            <div class="overview__header_details__values">
+              <span><img src="./resources/company.png" alt="company" /></span>
+              <p>
+                <span
+                  ><small class="overview__header__company"
+                    >24 de feb 2022</small
+                  ></span
+                >
+              </p>
+            </div>
+          </div>
         </div>
       </header>
       <section class="overview">
         <section class="overview__body">
+          <div class="assignedStudent__container">
+            <h5>Estudiante Asignado</h5>
+            <div class="assignedStudent__card">
+              <img class="assinegStudent__img" src="../../Components/Sidebar/resources/profilePicture1.png">
+              <div class="assignedStudent__information">
+                <div class="assignedStudent__header">
+                  <h6 class="assignedStudent__information__studentName">
+                    Student Name
+                  </h6>
+                  <a class="assignedStudent__information__goToProfile">Ver perfil</a>
+                </div>
+                <div class="assignedStudent__data">
+                  <span class="assignedStudent__information__detail">
+                    <img src="./../../Components/CandidateCard/resources/University.png">
+                    <p> 
+                      <small class="assignedStudent__information__university">
+                        Universidad Icesi
+                      </small>
+                      </p>
+                  </span>
+                  <span class="assignedStudent__information__detail">
+                    <img src="./../../Components/CandidateCard/resources/Area.png">
+                    <p> 
+                      <small class="assignedStudent__information__area">
+                        Diseño
+                      </small>
+                      </p>
+                  </span>
+                </div>
+                <div style="display: flex; gap: 20px; ">
+                  <div>
+                      <img class="experienceRaitingStar" src="../Profile/resources/emptyStar.png">
+                      <img class="experienceRaitingStar" src="../Profile/resources/emptyStar.png">
+                      <img class="experienceRaitingStar" src="../Profile/resources/emptyStar.png">
+                      <img class="experienceRaitingStar" src="../Profile/resources/emptyStar.png">
+                      <img class="experienceRaitingStar" src="../Profile/resources/emptyStar.png">
+
+                  </div>
+                  <p><small class="experienceRaiting">4.20</small></p>
+              </div>
+              </div>
+            </div>
+          </div>
           <div class="container__body__projectBrief">
             <h5>Brief</h5>
             <p class="overview__body__projectBrief">
@@ -167,7 +234,7 @@
           </p>
           <a href="#" class="overview__attached__button"
             ><img src="./resources/files.png" alt="files" />
-            <p><small>Descargar archivos</small></p></a
+            <p><small>Ver archivos</small></p></a
           >
           <div class="overview__divider"></div>
           <h6>Links</h6>
@@ -183,8 +250,12 @@
             Entregar
           </button>
           <button id="ApplyBtn" class="cta_button --accented">Aplicar</button>
-          <a id="showDeliver" target="_blank" class="cta_button">Revisar Entrega</a>
-          <button id="AcceptDeliverBtn" class="cta_button --accented">Aceptar Entrega</button>
+          <a id="showDeliver" target="_blank" class="cta_button"
+            >Revisar Entrega</a
+          >
+          <button id="AcceptDeliverBtn" class="cta_button --accented">
+            Aceptar Entrega
+          </button>
         </aside>
       </section>
     </main>
@@ -254,15 +325,9 @@
               name="conditions"
               id="conditions"
             />
-            <small
-              ><label for="conditions"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-                quas ducimus voluptatem inventore necessitatibus, ab ut
-                assumenda distinctio doloribus optio dicta obcaecati
-                perspiciatis, eius et consectetur, maxime accusantium nam
-                esse.</label
-              ></small
-            >
+            <small><label for="conditions"
+              >Aceptas <a href="https://docs.google.com/document/d/12iNnPYGnc33N6dsxabPD1CQhnYHlIo_V/edit?usp=share_link&ouid=105502683915846804257&rtpof=true&sd=true"> terminos y condiciones</a> </label
+            ></small>
           </p>
           <footer>
             <button type="button" class="cta_button cancelBtn">Cancelar</button>
@@ -304,19 +369,15 @@
               name="conditions"
               id="conditions"
             />
-            <small
-              ><label for="conditions"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-                quas ducimus voluptatem inventore necessitatibus, ab ut
-                assumenda distinctio doloribus optio dicta obcaecati
-                perspiciatis, eius et consectetur, maxime accusantium nam
-                esse.</label
-              ></small
-            >
+            <small><label for="conditions"
+              >Aceptas <a href="https://docs.google.com/document/d/12iNnPYGnc33N6dsxabPD1CQhnYHlIo_V/edit?usp=share_link&ouid=105502683915846804257&rtpof=true&sd=true"> terminos y condiciones</a> </label
+            ></small>
           </p>
           <footer>
             <button type="button" class="cta_button cancelBtn">Cancelar</button>
-            <button type="submit" class="cta_button --accented">Aplicar al proyecto</button>
+            <button type="submit" class="cta_button --accented">
+              Aplicar al proyecto
+            </button>
           </footer>
         </form>
       </div>
@@ -335,7 +396,9 @@
         <form id="AcceptDeliverModalForm" name="AcceptDeliverModalForm">
           <div class="textInput">
             <p>
-              <label for="message"><small>¿Deseas dejar algún comentario?</small></label>
+              <label for="message"
+                ><small>¿Deseas dejar algún comentario?</small></label
+              >
             </p>
             <textarea
               required="true"
@@ -355,17 +418,94 @@
             />
             <small
               ><label for="conditions"
-                >Aceptas esta entrega según los terminos y condiciones establecidos</label
+                >Aceptas esta entrega según los terminos y condiciones
+                establecidos</label
               ></small
             >
           </p>
           <footer>
             <button type="button" class="cta_button cancelBtn">Cancelar</button>
-            <button type="submit" class="cta_button --accented">Aceptar Entrega</button>
+            <button type="submit" class="cta_button --accented">
+              Aceptar Entrega
+            </button>
           </footer>
         </form>
       </div>
     </div>
+
+    <div id="AcceptStudentModal" class="modal hidden">
+      <div class="modalPanel">
+        <div class="modalPanel__header">
+          <div class="modalPanel__header__info">
+            <h5>Aceptar Estudiante</h5>
+          </div>
+          <button class="closeModal__btn">
+            <img src="./resources/close.png" alt="close" />
+          </button>
+        </div>
+        <form id="AcceptStudentModalForm" name="AcceptStudentModalForm">
+          <p>
+            ¿Deseas aceptar a <span>Alejandro Valverde</span> para que realice
+            este proyecto?
+          </p>
+          <p>
+            <input
+              required="true"
+              type="checkbox"
+              name="conditions"
+              id="conditions"
+            />
+            <small><label for="conditions"
+                >Aceptas <a href="https://docs.google.com/document/d/12iNnPYGnc33N6dsxabPD1CQhnYHlIo_V/edit?usp=share_link&ouid=105502683915846804257&rtpof=true&sd=true"> terminos y condiciones</a> </label
+              ></small>
+          </p>
+          <footer>
+            <button type="button" class="cta_button cancelBtn">Cancelar</button>
+            <button type="submit" class="cta_button --accented">
+              Aceptar al Estudiante
+            </button>
+          </footer>
+        </form>
+      </div>
+    </div>
+    <div id="RejectStudentModal" class="modal hidden">
+      <div class="modalPanel">
+        <div class="modalPanel__header">
+          <div class="modalPanel__header__info">
+            <h5>Rechazar Estudiante</h5>
+          </div>
+          <button class="closeModal__btn">
+            <img src="./resources/close.png" alt="close" />
+          </button>
+        </div>
+        <form id="RejectStudentModalForm" name="RejectStudentModalForm">
+          <p>
+            ¿Deseas rechazar a <span>Alejandro Valverde</span> para que realice
+            este proyecto?
+          </p>
+          <p>
+            <input
+              required="true"
+              type="checkbox"
+              name="conditions"
+              id="conditions"
+            />
+            <small
+              ><label for="conditions"
+                >Aceptas terminos y condiciones</label
+              ></small
+            >
+          </p>
+          <footer>
+            <button type="button" class="cta_button cancelBtn">Cancelar</button>
+            <button type="submit" class="cta_button --accented">
+              Rechazar al Estudiante
+            </button>
+          </footer>
+        </form>
+      </div>
+    </div>
+    
     <script type="module" src="./overview.js"></script>
   </body>
 </html>

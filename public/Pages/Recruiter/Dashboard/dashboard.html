@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./dashboard.css" />
     <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css" />
     <link rel="stylesheet" href="././../../../Components/Sidebar/sidebar.css" />
+    <link rel="shortcut icon" href="./../../LandingPage/resources/images/favicon.png" type="image/x-icon">
     <link
       rel="stylesheet"
       href="./../../../Components/ProjectCard/project_card.css"
@@ -93,7 +94,7 @@
           <h5>Mis métricas</h5>
           <div>
             <div class="dashboard_me__stats__statCard">
-              <h2>18</h2>
+              <h2>12M</h2>
               <p>
                 Dinero<br />
                 invertido
@@ -110,6 +111,31 @@
         </section>
       </section>
     </main>
+
+    <div id="newProjectModal" class="modal hidden">
+      <div class="modalPanel">
+        <div class="modalPanel__header">
+          <div class="modalPanel__header__info">
+            <h5>Has creado un nuevo proyecto</h5>
+          </div>
+          <button class="closeModal__btn">
+            <img src="./../../Projects/resources/close.png" alt="close" />
+          </button>
+        </div>
+        <form id="newProjectModalForm" name="newProjectModalForm">
+          <p>
+            Has creado un nuevo proyecto de forma exitosa, ve a la sección de proyectos en espera para revisar los candidatos a realizar este proyecto
+          </p>
+         
+          <footer>
+            <button type="submit" class="cta_button --accented">
+              Aceptar
+            </button>
+          </footer>
+        </form>
+      </div>
+    </div>
+    
     <script type="module" src="./dashboard.js"></script>
   </body>
 </html>

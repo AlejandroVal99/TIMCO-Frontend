@@ -31,6 +31,7 @@ const ListCard = (() => {
     if (type === "student") {
       projectLogo.src = project.logoUri;
     } else if (type === "recruiter") {
+      console.log(project);
       projectLogo.src = project.company.profileImage;
     }
     card.appendChild(projectLogo);

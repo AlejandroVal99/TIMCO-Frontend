@@ -24,6 +24,9 @@ const API = (() => {
   const GoToRecruiterDashboard = () => {
     GoTo("Pages/Recruiter/Dashboard/dashboard.html");
   };
+  const GoToRecruiterDashboardNewProject = ()=>{
+    GoTo("Pages/Recruiter/Dashboard/dashboard.html?newProject=true");
+  }
   const GoToStudentDashboard = () => {
     GoTo("Pages/Student/Dashboard/dashboard.html");
   };
@@ -159,9 +162,9 @@ const API = (() => {
     });
     const response = await request.json();
     if (response.error) return response.error;
-    let currentUserId = parseJwt(response.accessToken).data;
+    let currentUserId = parseJwt(response.data);
     localStorage.setItem(loggedRecruiterKey, currentUserId);
-    localStorage.setItem("token", response.access);
+    localStorage.setItem("token", response.data);
     GoToRecruiterDetails();
   }; //Closes SignUpRecruiter method
 
@@ -184,32 +187,37 @@ const API = (() => {
     GoToRecruiterDashboard();
   };
   //Closes LoginRecruiter Method
-
+  
   const UploadRecruiterDetails = async (details) => {
-    token = localStorage.getItem("token");
-    try {
-      const request = await fetch(`${postURL}/company`, {
-        method: "PUT",
-        body: JSON.stringify(details),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      switch (request.status) {
-        case 200:
-          // Instead of storing student You should store whatever the server
-          // responds to a succesful login - it should contain user credentials
-          SignOutRecruiter();
-          break;
+    let token = localStorage.getItem("token");
+   details.name = details.companyId.name;
+   details.email = details.companyId.email;
+   //details.companyId = details.companyId.companyId;
+    console.log(details);
+    //debugger;
+    // try {
+    //   const request = await fetch(`${postURL}/company`, {
+    //     method: "PUT",
+    //     body: JSON.stringify(details),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   switch (request.status) {
+    //     case 200:
+    //       // Instead of storing student You should store whatever the server
+    //       // responds to a succesful login - it should contain user credentials
+    //       SignOutRecruiter();
+    //       break;
 
-        case 401:
-          alert("La petición no dió resultado");
-          break;
-      }
-    } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
+    //     case 401:
+    //       alert("La petición no dió resultado");
+    //       break;
+    //   }
+    // } catch (error) {
+    //   alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    // }
   }; //Closes UploadStudentDetails method
 
   const SignOutRecruiter = () => {
@@ -296,7 +304,7 @@ const API = (() => {
           break;
       }
     } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+      alert("Hubo un problema, intentalo de nuevo en unos minutos :(");
     }
   };
 
@@ -544,6 +552,7 @@ const API = (() => {
     IsRecruiterLogged,
     currentRecruiterId,
     GoToRecruiterDashboard,
+    GoToRecruiterDashboardNewProject,
     GoToRecruiterDetails,
     GoToRecruiterLogin,
     GetStaticRoute,

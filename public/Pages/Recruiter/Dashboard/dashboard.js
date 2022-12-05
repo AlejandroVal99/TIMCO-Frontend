@@ -7,12 +7,17 @@ import codedecJwt from "./../../../src/utils/parseJWT.js";
 
 let projects = [];
 
+const urlParams = new URLSearchParams(window.location.search);
+const newProjectCreated = urlParams.get("newProject");
+
+
 document.getElementById("signOutButton").addEventListener("click", () => {
   SignOut();
 });
 
 // const vacancyContainer = document.querySelector("#dashboard__vacancies");
 let myProjectsContainer = document.querySelector("#dashboard__vacancies");
+const newProjectModal = document.querySelector("#newProjectModal")
 //const activeTabEle = document.getElementById("active-tab");
 const finishedTabEle = document.getElementById("finished-tab");
 const waitingTabEle = document.getElementById("waiting-tab");
@@ -123,7 +128,7 @@ const drawProjectsByState = (state) => {
 };
 const drawActiveProjects = ({ projects = [] }) => {
   projects.forEach((project) => {
-    debugger;
+  
     let card = ProjectCard.Create({
       project,
       primaryBtn: {
@@ -186,6 +191,37 @@ const OnProjectClicked = ({ projectId }) => {
   window.location.href = `./../../Projects/overview.html?projectId=${projectId}&owned=true&user=recruiter`;
 };
 
+const newProjectModalControl = () => {
+
+  if(newProjectCreated === "true"){
+
+    if (newProjectModal) {
+      newProjectModal.classList.remove("hidden");
+  
+      newProjectModal.querySelector(".closeModal__btn").addEventListener(
+        "click",
+        () => {
+          newProjectModal.classList.add("hidden");
+        }
+      );
+    
+      newProjectModal.addEventListener("click", (event) => {
+        if (event.target != newProjectModal) return;
+    
+        newProjectModal.classList.add("hidden");
+      });
+    
+      newProjectModal.querySelector("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        newProjectModal.classList.add("hidden");
+        
+      });
+
+  }
+
+  }
+
+};
 // activeTabEle.addEventListener("click", function () {
 //   activeTabEle.classList.add("selected");
 //   finishedTabEle.classList.remove("selected");
@@ -209,3 +245,4 @@ waitingTabEle.addEventListener("click", function () {
 getUserData();
 LoadProjects();
 loadNewProjectButton();
+newProjectModalControl();

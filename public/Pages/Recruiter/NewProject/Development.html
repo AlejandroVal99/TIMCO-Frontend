@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="./NewProject.css">
 
+    <link rel="shortcut icon" href="./../../LandingPage/resources/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./../../../Components/TextInput/text__input.css">
     <link rel="stylesheet" href="./../../../Components/ClosableLid/closableLid.css">
     <link rel="stylesheet" href="./../../../Components/TabNavBar/top_tab_navbar.css">
@@ -123,6 +124,33 @@
                 </div>
             </form>
         </section>
+
+        <section class="details__forms hidden">
+            <img src="./resources/cover03.png">
+            <form class="details__forms__form" action="">
+                <h1>Publica tu proyecto</h1>
+                <p><small>Explicale a los estudiantes algunos detalles sobre tu proyecto, para facilitar su desarrollo y
+                        obtener los resultados que esperas</small></p>
+    
+                <div class="textInput">
+                    <label for="projectDeliverables">
+                        <p>Entregables del proyecto*</p>
+                    </label>
+                    <textarea required="true" rows="8" cols="5" name="deliverables" id="projectDeliverables"
+                        placeholder="Ej: Brand Book con todos elementos que lo componen, Aplicaciones de la marca y papeleria."></textarea>
+                </div>
+    
+                <div class="details__forms__form__letterbox">
+                    <h3>Recomendación</h3>
+                    <p><small>Deja claramente especificado los entregables que esperas recibir al finalizar el proyecto, esto facilitará el proceso del estudiante y sabrá que cosas debe tener listas.</small></p>
+                </div>
+    
+                <div class="submit_buttons">
+                    <button type="button" class="cta_button" onclick="PreviousSection()">Regresar</button>
+                    <button type="submit" class="cta_button --accented">Siguiente</button>
+                </div>
+            </form>
+        </section>
     
         <section class="details__forms hidden">
             <img src="./resources/cover03.png">
@@ -167,7 +195,7 @@
                         placeholder="dd/mm/yyyy">
                 </div>
 
-                <p>¡A qué semestre quieres que pertenezcan los estudiantes que desarrollen tu proyecto?</p>
+                <p>¿A qué semestre quieres que pertenezcan los estudiantes que desarrollen tu proyecto?</p>
 
 
                 <label class="checkboxList__checkbox" for="5to7">

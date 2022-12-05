@@ -104,6 +104,8 @@ const drawProjectsByState = (state) => {
     projectsFilter = projectsFilter.map(({ project }, index) => {
       return { ...project, state: candidateProjects[index].state };
     });
+    console.log(projectsFilter);
+    
   } else if (state === constants.states.FINISHED_PROJECT_ID) {
     projectsFilter = projects.filter(
       (project) =>
@@ -177,6 +179,7 @@ const drawProjects = ({ projects = [] }) => {
         });
         break;
       case constants.states.WAITING_PROJECT_ID:
+       
         card = ListCard.CreateProjectCard({
           project,
           primaryBtn: {
@@ -189,6 +192,7 @@ const drawProjects = ({ projects = [] }) => {
           },
           type: "recruiter",
         });
+        
         break;
     }
 

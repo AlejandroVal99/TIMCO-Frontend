@@ -92,7 +92,7 @@ main {
 .overview__header__projectDescription,
 .overview__body__projectBrief,
 .overview__header__projectType {
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 
 .overview__header__details > div > span {
@@ -241,6 +241,44 @@ main {
   max-width: 100px;
   height: 100px;
   object-fit: cover;
+}
+
+.assignedStudent__card{
+  display: flex;
+  margin-top: 8px;
+  
+}
+.assignedStudent__information{
+  width: 100%;
+}
+.assinegStudent__img{
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  margin-right: 16px;
+}
+.assignedStudent__header{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.assignedStudent__data{
+  display: flex;
+  justify-content: flex-start;
+}
+.assignedStudent__information__detail{
+  display: flex;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+.assignedStudent__information__detail>img{
+  width: 24px;
+  height: 24px;
+}
+.assignedStudent__information__detail:last-child{
+  margin-left:16px
 }
 
 @media (max-width: 900px) {
